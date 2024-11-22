@@ -1,0 +1,149 @@
+_schema-version: 3.3.0
+ID: NFA_Approval
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: NFA_Approval-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: cross-container-service-1
+  - name: uaa_NFA_Approval
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    readiness-health-check-http-endpoint: /health
+    readiness-health-check-type: http
+  build-parameters:
+    builder: npm
+- name: NFA_Approval-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: cross-container-service-1
+    group: SERVICE_REPLACEMENTS
+    properties:
+      key: SharedDevKey
+      service: main_db2-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: NFA_Approval-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: NFA_Approval-destination-service
+    parameters:
+      content-target: true
+  - name: NFA_Approval_html_repo_host
+    parameters:
+      service-key:
+        name: NFA_Approval_html_repo_host-key
+  - name: uaa_NFA_Approval
+    parameters:
+      service-key:
+        name: uaa_NFA_Approval-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: nfaapprovalapprouter_NFA_Approval_html_repo_host
+          ServiceInstanceName: NFA_Approval-html5-app-host-service
+          ServiceKeyName: NFA_Approval_html_repo_host-key
+          sap.cloud.service: nfaapprovalapprouter
+        - Authentication: OAuth2UserTokenExchange
+          Name: nfaapprovalapprouter_uaa_NFA_Approval
+          ServiceInstanceName: NFA_Approval-xsuaa-service
+          ServiceKeyName: uaa_NFA_Approval-key
+          sap.cloud.service: nfaapprovalapprouter
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: NFA_Approval-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: NFA_Approval_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - nfaapproval.zip
+      name: nfaapproval
+      target-path: resources/
+- name: nfaapproval
+  type: html5
+  path: app/nfa_approval
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: NFA_Approval-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+  properties:
+    hdi-container-name: ${service-name}
+- name: NFA_Approval-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: NFA_Approval-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: NFA_Approval-destination-service
+    service-plan: lite
+  requires:
+  - name: srv-api
+- name: NFA_Approval_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: NFA_Approval-html5-app-host-service
+    service-plan: app-host
+- name: uaa_NFA_Approval
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: NFA_Approval-xsuaa-service
+    service-plan: application
+- name: cross-container-service-1
+  type: org.cloudfoundry.existing-service
+  parameters:
+    service-name: "main_db2-db"
+  properties:
+    the-service-name: ${service-name}
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
