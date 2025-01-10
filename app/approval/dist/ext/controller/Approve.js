@@ -1,0 +1,2 @@
+sap.ui.define(["sap/m/MessageToast"],function(e){"use strict";return{Approve:function(o){e.show("Custom handler invoked.");debugger;var s=location.href;const n=/PAN_Details_APR\('([^']+)'\)/;var t=s.match(n);console.log(t)}}});
+//# sourceMappingURL=Approve.js.map

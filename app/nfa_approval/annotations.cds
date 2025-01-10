@@ -1,5 +1,5 @@
 using CatalogService as service from '../../srv/service';
-annotate service.tab1 with @(
+annotate service.PAN_Details_APR with @(
      UI.CreateHidden : true,
     UI.DeleteHidden :true,
     UI.FieldGroup #GeneratedGroup : {

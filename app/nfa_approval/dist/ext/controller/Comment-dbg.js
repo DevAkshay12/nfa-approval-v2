@@ -11,6 +11,7 @@ sap.ui.define([
 
     return {
         comment: function(oEvent,) {
+            debugger
             baseuri = this._view.getParent().getAppComponent().getManifestObject()._oBaseUri._string;
             debugger
             // Define the settings for the AJAX request

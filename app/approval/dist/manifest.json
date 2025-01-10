@@ -1,0 +1,263 @@
+{
+    "_version": "1.65.0",
+    "sap.app": {
+        "id": "approval",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.15.7",
+            "toolsId": "e451d822-7ca0-4d1c-addb-abe809445c5c"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "odata/v4/pan-approval/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "approval-displayapproval": {
+                    "semanticObject": "approval",
+                    "action": "displayapproval",
+                    "title": "{{flpTitle}}",
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    }
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.126.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "approval.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "PAN_Details_APRList",
+                    "target": "PAN_Details_APRList"
+                },
+                {
+                    "pattern": "PAN_Details_APR({key}):?query:",
+                    "name": "PAN_Details_APRObjectPage",
+                    "target": "PAN_Details_APRObjectPage"
+                },
+                {
+                    "name": "PAN_Details_APR_tab1tovendor_dataObjectPage",
+                    "pattern": "PAN_Details_APR({key})/tab1tovendor_data({tab1tovendor_dataKey}):?query:",
+                    "target": "PAN_Details_APR_tab1tovendor_dataObjectPage"
+                }
+            ],
+            "targets": {
+                "PAN_Details_APRList": {
+                    "type": "Component",
+                    "id": "PAN_Details_APRList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/PAN_Details_APR",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "PAN_Details_APR": {
+                                    "detail": {
+                                        "route": "PAN_Details_APRObjectPage"
+                                    }
+                                }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "type": "GridTable"
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled"
+                        }
+                    }
+                },
+                "PAN_Details_APRObjectPage": {
+                    "type": "Component",
+                    "id": "PAN_Details_APRObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/PAN_Details_APR",
+                            "content": {
+                                "body": {
+                                    "sections": {
+                                        "Attachments": {
+                                            "template": "approval.ext.fragment.Attachments",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "VendorResponseDetails"
+                                            },
+                                            "title": "Attachments"
+                                        },
+                                        "Workflow": {
+                                            "template": "approval.ext.fragment.Workflow",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "Attachments"
+                                            },
+                                            "title": "workflow"
+                                        },
+                                        "Textarea": {
+                                            "template": "approval.ext.fragment.Textarea",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "Attachments"
+                                            },
+                                            "title": "Comments"
+                                        }
+                                    }
+                                },
+                                "footer": {
+                                    "actions": {
+                                        "Approve": {
+                                            "press": "approval.ext.controller.Approve.Approve",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Approve"
+                                        },
+                                        "Reject": {
+                                            "press": "approval.ext.controller.Reject.Reject",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Reject",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "Approve"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "navigation": {
+                                "tab1tovendor_data": {
+                                    "detail": {
+                                        "route": "PAN_Details_APR_tab1tovendor_dataObjectPage"
+                                    }
+                                }
+                            },
+                            "controlConfiguration": {
+                                "tab1tovendor_data/@com.sap.vocabularies.UI.v1.LineItem#VendorResponseDetails": {
+                                    "tableSettings": {
+                                        "type": "GridTable"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "PAN_Details_APR_tab1tovendor_dataObjectPage": {
+                    "type": "Component",
+                    "id": "PAN_Details_APR_tab1tovendor_dataObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "navigation": {},
+                            "contextPath": "/PAN_Details_APR/tab1tovendor_data",
+                            "controlConfiguration": {
+                                "vendtoptd/@com.sap.vocabularies.UI.v1.LineItem#PaymentTermDetails": {
+                                    "tableSettings": {
+                                        "type": "GridTable"
+                                    }
+                                },
+                                "vendtopd/@com.sap.vocabularies.UI.v1.LineItem#ItemDetails": {
+                                    "tableSettings": {
+                                        "type": "GridTable"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ObjectPage.ObjectPageController#approval::PAN_Details_APRObjectPage": {
+                        "controllerName": "approval.ext.controller.Objectpage"
+                    },
+                    "sap.fe.templates.ListReport.ListReportController#approval::PAN_Details_APRList": {
+                        "controllerName": "approval.ext.controller.List"
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "nfaapprovalapprouter"
+    }
+}

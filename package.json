@@ -12,7 +12,7 @@
     "@sap-cloud-sdk/http-client": "^3.23.0",
     "@sap-cloud-sdk/resilience": "^3.23.0",
     "@sap/xssec": "^4.2.7",
-     "passport": "^0.7.0"
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.7.0",
@@ -25,7 +25,8 @@
     "watch-nfa_approval": "cds watch --open nfa_approval/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy NFA_Approval --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-approval": "cds watch --open approval/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "sql": {
@@ -37,6 +38,7 @@
     }
   },
   "sapux": [
-    "app/nfa_approval"
+    "app/nfa_approval",
+    "app/approval"
   ]
 }

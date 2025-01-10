@@ -1,0 +1,1 @@
+GET http://localhost:4004/odata/v4/pan-approval/getdata(data='rajendraakshay1@gmail.com')
