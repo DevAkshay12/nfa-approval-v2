@@ -38,7 +38,7 @@
 							enabledRemove="false"
 							selected="false"
 							visibleEdit="false"
-							visibleRemove="false"
+							visibleRemove="true"
 							
 						>
 							<upload:attributes>

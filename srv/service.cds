@@ -16,6 +16,7 @@ service CatalogService {
    entity PAN_WORKFLOW_HISTORY_APR as projection on my.PAN_WORKFLOW_HISTORY;
     entity approversKeys as projection on my.approversKeys;
     function sendforapproval(data:String) returns LargeString;
+    function comment(data:String) returns LargeString;
 }
 
 service PanApproval {
@@ -33,4 +34,5 @@ service PanApproval {
  entity vendorTaxDetails_APR as projection on my.vendorTaxDetails;
  entity approversKeys as projection on my.approversKeys;
  function getdata(data:String) returns String;
+ function approve(data:String) returns String;
 }

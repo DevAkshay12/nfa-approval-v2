@@ -172,7 +172,15 @@
                                                 "placement": "After",
                                                 "anchor": "Attachments"
                                             },
-                                            "title": "Comments"
+                                            "title": "Comments",
+                                            "actions": {
+                                                "CommentHistory": {
+                                                    "press": "approval.ext.controller.Comment.comment",
+                                                    "visible": true,
+                                                    "enabled": true,
+                                                    "text": "Comment History"
+                                                }
+                                            }
                                         }
                                     }
                                 },
