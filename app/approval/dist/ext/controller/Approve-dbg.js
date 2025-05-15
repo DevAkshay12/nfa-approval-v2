@@ -12,12 +12,13 @@ sap.ui.define([
                     const regex = /PAN_Details_APR\('([^']+)'\)/;
                     var val = id.match(regex);
                     console.log("Extracted Document ID:", val ? val[1] : "Not Found");
-                var cFunction = this.base.getModel().bindContext(`/${'approve'}(...)`);
-				cFunction.setParameter("data", val);
+                var cFunction = this._view.getModel().bindContext(`/${'approve'}(...)`);
+				cFunction.setParameter("data", val[1]);
 				await cFunction.execute();
 				let oContext1 = cFunction.getBoundContext();
 				let result1 = oContext1.getObject();
-                 
+                console.log(result1);
+                
             } 
 
            else {
