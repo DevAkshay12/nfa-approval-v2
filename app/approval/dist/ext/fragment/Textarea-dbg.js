@@ -5,7 +5,13 @@ sap.ui.define([
 
     return {
         onPress: function(oEvent) {
+            debugger
             MessageToast.show("Custom handler invoked.");
+        },
+        live : function(oEvent)
+        {
+            debugger
+            
         }
     };
 });

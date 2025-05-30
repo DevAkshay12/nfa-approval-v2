@@ -1,0 +1,6 @@
+GET http://localhost:4004/odata/v4/pan-approval/approve
+Content-Type: application/json
+
+{
+  "data": "Doc1025528402"
+}

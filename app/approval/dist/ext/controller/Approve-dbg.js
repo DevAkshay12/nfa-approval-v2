@@ -18,6 +18,16 @@ sap.ui.define([
 				let oContext1 = cFunction.getBoundContext();
 				let result1 = oContext1.getObject();
                 console.log(result1);
+                // const oRouter = this.getOwnerComponent().getRouter();
+                // oRouter.navTo("PAN_Details_APRList");
+                
+                sap.m.MessageToast.show("Approved", {
+                    duration: 2000,
+                    width: "15em",
+                    my: "center bottom",
+                    at: "center bottom"
+                }); 
+                window.history.go(-2);
                 
             } 
 

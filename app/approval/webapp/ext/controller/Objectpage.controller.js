@@ -13,6 +13,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
 				var oModel = this.base.getExtensionAPI().getModel();
 			},
+			editFlow: {
+				onAfterSave : async function (oEvent){
+					debugger
+				}
+			},
 			routing: {
                 onAfterBinding: async function (oEvent) {
 					debugger
@@ -21,8 +26,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				var workflow_table = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Workflow--sampleTable");
 				workflow_table.addStyleClass("workFlowTable"  );
 				var settings = {
-					// url: baseuri + "odata/v4/catalog/PAN_WORKFLOW_HISTORY_APR",  // URL for fetching the data
-					url: "/odata/v4/catalog/PAN_WORKFLOW_HISTORY_APR",  // URL for fetching the data
+					url: baseuri + "odata/v4/catalog/PAN_WORKFLOW_HISTORY_APR",  // URL for fetching the data
+					// url: "/odata/v4/catalog/PAN_WORKFLOW_HISTORY_APR",  // URL for fetching the data
 					method: "GET",  // Use GET method to fetch data
 					headers: {
 						"Accept": "application/json"  // Expect JSON response
@@ -48,7 +53,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 										new sap.m.Text({ text: "{PAN_Number}" }),
 										new sap.m.Text({ text: "{Employee_Name}" }),
 										new sap.m.Text({ text: "{level}" }),
-										new sap.m.Text({ text: "{Notification_Status}" }),
+										new sap.m.Text({ text: "{Remarks}" }),
 										new sap.m.Text({ text: "{Approved_by}" })
 									]
 								})
@@ -66,7 +71,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					{ header: "Employee Id", path: "PAN_Number" },
 					{ header: "Employee Name", path: "Employee_Name" },
 					{ header: "Level", path: "level" },
-					{ header: "Status", path: "Notification_Status" },
+					{ header: "Status", path: "Remarks" },
 					{ header: "Approved By", path: "Approved_by" }
 				];
 
