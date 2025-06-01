@@ -1,6 +1,14 @@
-GET http://localhost:4004/odata/v4/pan-approval/approve
+# GET http://localhost:4004/odata/v4/pan-approval/approve
+# Content-Type: application/json
+
+# {
+#   "data": "Doc1025528402"
+# }
+
+GET http://localhost:4004/odata/v4/pan-approval/wf_data
 Content-Type: application/json
 
 {
-  "data": "Doc1025528402"
+  "panno": "Doc1025528402",
+  "comment" : "demo comment"
 }

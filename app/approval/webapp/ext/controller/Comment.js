@@ -25,8 +25,8 @@ baseuri = this._view.getParent().getAppComponent().getManifestObject()._oBaseUri
 debugger
 // Define the settings for the AJAX request
 var settings = {
-    // url: "/odata/v4/catalog/PAN_Comments_APR",  // URL for fetching the comments
-    url: baseuri + "odata/v4/catalog/PAN_Comments_APR",  // URL for fetching the comments
+    // url: "/odata/v4/pan-approval/PAN_Comments_APR",  // URL for fetching the comments
+    url: baseuri + "odata/v4/pan-approval/PAN_Comments_APR",  // URL for fetching the comments
     method: "GET",  // Use GET method to fetch data
     headers: {
         "Accept": "application/json"  // Indicate the response type you expect
