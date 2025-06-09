@@ -308,17 +308,17 @@ entity approversKeys {
 }
 
 entity PAN_Payment_Method_Drop {
-  
-  key id :UUID;
-  Payment_method :String;
-  
+
+  key id             : UUID;
+      Payment_method : String;
+
 }
 
-entity vendorTaxDetails{
-  key Proposed_Vendor_Code : String; 
-  key  PAN_Number : String;
-  key Item_Code : String;
-  key idd :UUID;
-  name :String;
-  value :String;
+entity vendorTaxDetails {
+  key Proposed_Vendor_Code : String;
+  key PAN_Number           : String;
+  key Item_Code            : String;
+  key idd                  : UUID;
+      name                 : String;
+      value                : String;
 }

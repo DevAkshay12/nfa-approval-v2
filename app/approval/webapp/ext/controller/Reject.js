@@ -6,6 +6,19 @@ sap.ui.define([
     return {
         Reject: async function (oEvent) {
             debugger
+            sap.m.MessageToast.show("Rejected", {
+                width: "15em",
+                my: "center bottom",
+                at: "center bottom"
+            });
+
+            // Show busy dialog after toast is shown
+            let oBusyDialog = new sap.m.BusyDialog({
+                title: "Processing Rejection",
+                text: "Please wait..."
+            });
+
+            oBusyDialog.open();
             var textarea = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Textarea--textareafrag");
             if (textarea.getValue().length > 0) {
                 var id = location.href;
@@ -21,7 +34,8 @@ sap.ui.define([
                 let wf_result = wf_context.getObject();
                 console.log(wf_result);
 
-                var email = "rajendraakshay1@gmail.com"
+                var email = sap.ushell.Container.getUser().getEmail();
+                // var email = "rajendraakshay1@gmail.com"
                 var rej_func = this._view.getModel().bindContext(`/${'reject'}(...)`);
                 rej_func.setParameter("data", val[1]);
                 rej_func.setParameter("email", email);
@@ -30,20 +44,7 @@ sap.ui.define([
                 let rej_result = rej_context.getObject();
                 console.log(rej_result);
 
-                sap.m.MessageToast.show("Rejected", {
-                    duration: 3000,
-                    width: "15em",
-                    my: "center bottom",
-                    at: "center bottom"
-                });
-
-                // Show busy dialog after toast is shown
-                let oBusyDialog = new sap.m.BusyDialog({
-                    title: "Processing Rejection",
-                    text: "Please wait..."
-                });
-
-                oBusyDialog.open();
+               
 
                 // Automatically close after 2 seconds (optional)
                 setTimeout(function () {

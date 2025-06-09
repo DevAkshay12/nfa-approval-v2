@@ -1,0 +1,19 @@
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FooterBar\:\:CustomAction\:\:Approve
+{
+    /* border-radius: 8px;
+    font-size: 1rem;
+
+    background-color: #3ab71b; 
+    color: white !important;
+    border: none; */
+}
+
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FooterBar\:\:CustomAction\:\:Reject
+{
+    border-radius: 8px;
+    font-size: 1rem;
+
+    background-color: #d70e0e; 
+    color: white !important;
+    border: none;
+}

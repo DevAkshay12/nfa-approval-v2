@@ -6,13 +6,27 @@ module.exports = cds.service.impl(async function () {
   const { PAN_Details_APR, PAN_WORKFLOW_HISTORY_APR, PAN_Comments_APR } = this.entities;
 
   this.on('getdata', async (req) => {
-    // var query = await SELECT.from(PAN_Details_APR).where`Sap_workitem_id is not null`;
-    const query = await SELECT.from(PAN_Details_APR).where({ Sap_workitem_id: { '!=': null } });
-    console.log(query);
+
     var name = req.data.data;
+    const statusRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR).where({
+      Employee_Name: name
+    });
+
+    if (!statusRecord) return null;
+
+    let currentStatus = 0;
+    if (statusRecord.Notification_Status && !isNaN(statusRecord.Notification_Status)) {
+      currentStatus = parseInt(statusRecord.Notification_Status, 10);
+    }
+
+    const nextLevel = (currentStatus + 1).toString();
+
     const queryResult = await SELECT.from(PAN_WORKFLOW_HISTORY_APR).where({
       Employee_Name: name,
+      level: nextLevel
     });
+
+
     if (queryResult.length > 0) {
       const client = 'sb-f5db712d-7e56-4659-8aa0-a43859ddd675!b449023|xsuaa!b49390';
       const secret = '8dbe1dd1-2557-49e7-938d-3cb18bb0b753$bqbpGc9HXFf9XSFuSSXM9RH4V-FUh_J3_OL-tZ4uqUM=';
@@ -217,15 +231,30 @@ module.exports = cds.service.impl(async function () {
 
 
 
-      
-      //june 1 2025
 
-      
-      //june 1 2025
+      //time calculate
+      const submittedDate = new Date(queryResult[0].submitted_date); // from DB
+      const currentDate = new Date(); // now
+
+      const diffMs = currentDate - submittedDate; // difference in milliseconds
+      const totalHours = Math.floor(diffMs / (1000 * 60 * 60)); // total hours
+      const days = Math.floor(totalHours / 24);
+      const hours = totalHours % 24;
+
+      let daystaken = '';
+      if (days > 0) {
+        daystaken += `${days} day${days > 1 ? 's' : ''}`;
+      }
+      if (hours > 0) {
+        if (daystaken.length > 0) daystaken += ' and ';
+        daystaken += `${hours} hour${hours > 1 ? 's' : ''}`;
+      }
+
+      //time calculate
 
 
 
-      
+
 
       // Check if data exists and Sap_workitem_id is present
       if (!queryResult || queryResult.length === 0 || !queryResult[0].Sap_workitem_id) {
@@ -292,7 +321,10 @@ module.exports = cds.service.impl(async function () {
         var res = await UPDATE(PAN_WORKFLOW_HISTORY_APR, {
           idd: rowToApprove.idd
         }).with({
-          Remarks: "approved",
+          Remarks: `Approved by ${mail}`,
+          Approved_by: mail,
+          End_DateAND_Time : new Date() ,
+          Days_Taken : daystaken
           // Notification_Status : rowToApprove.idd
         });
 
@@ -300,49 +332,49 @@ module.exports = cds.service.impl(async function () {
 
 
         //june 1 updated
-        
-      //june 1 2001
-      
 
-      let newStatus = "1"; // default if no value
-      let shouldUpdate = false;
+        //june 1 2001
 
-      // Step 1: Fetch the existing record
-      const existingRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR)
-        .where({ PAN_Number: req.data.data });
 
-        console.log(existingRecord,"selected workflow history data only one")
+        let newStatus = "1"; // default if no value
+        let shouldUpdate = false;
 
-      // Step 2: Decide whether to update
-      if (existingRecord) {
-        const status = existingRecord.Notification_Status;
-        if (!status || status.trim() === "") {
-          // First time, set to "1"
-          newStatus = "1";
-          shouldUpdate = true;
-        } else {
-          const currentStatus = parseInt(status, 10);
-          if (!isNaN(currentStatus)) {
-            newStatus = (currentStatus + 1).toString();
+        // Step 1: Fetch the existing record
+        const existingRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR)
+          .where({ PAN_Number: req.data.data });
+
+        console.log(existingRecord, "selected workflow history data only one")
+
+        // Step 2: Decide whether to update
+        if (existingRecord) {
+          const status = existingRecord.Notification_Status;
+          if (!status || status.trim() === "") {
+            // First time, set to "1"
+            newStatus = "1";
             shouldUpdate = true;
+          } else {
+            const currentStatus = parseInt(status, 10);
+            if (!isNaN(currentStatus)) {
+              newStatus = (currentStatus + 1).toString();
+              shouldUpdate = true;
+            }
           }
         }
-      }
 
-      // Step 3: Update only if required
-      if (shouldUpdate) {
-        const wf = await UPDATE(PAN_WORKFLOW_HISTORY_APR)
-          .where({ PAN_Number: req.data.data })
-          .with({
-            Employee_ID: mail,
-            Notification_Status: newStatus
-          });
+        // Step 3: Update only if required
+        if (shouldUpdate) {
+          const wf = await UPDATE(PAN_WORKFLOW_HISTORY_APR)
+            .where({ PAN_Number: req.data.data })
+            .with({
+              // Employee_ID: mail,
+              Notification_Status: newStatus
+            });
 
-        console.log("Updated record:", wf);
-      } else {
-        console.log("No update needed.");
-      }
-      //june 1 2001
+          console.log("Updated record:", wf);
+        } else {
+          console.log("No update needed.");
+        }
+        //june 1 2001
 
 
         //june 1 updated
@@ -380,8 +412,14 @@ module.exports = cds.service.impl(async function () {
           PAN_Number: req.data.data
         }).with({
           Sap_workitem_id: null,
-          status: "Approved"
+          status: `Approved by ${mail}`
         });
+
+        const update_status = await UPDATE(PAN_WORKFLOW_HISTORY_APR)
+          .where({ PAN_Number: req.data.data })
+          .with({
+            Notification_Status: null
+          });
         console.log(id_null, "id is made null")
 
         return "Process completed";
@@ -402,6 +440,27 @@ module.exports = cds.service.impl(async function () {
       const query = await SELECT.from(PAN_Details_APR).where({
         PAN_Number: req.data.data
       });
+
+      //time calculate
+      const submittedDate = new Date(query[0].submitted_date); // from DB
+      const currentDate = new Date(); // now
+      const diffMs = currentDate - submittedDate; // difference in milliseconds
+      const totalHours = Math.floor(diffMs / (1000 * 60 * 60)); // total hours
+      const days = Math.floor(totalHours / 24);
+      const hours = totalHours % 24;
+
+      let daystaken = '';
+      if (days > 0) {
+        daystaken += `${days} day${days > 1 ? 's' : ''}`;
+      }
+      if (hours > 0) {
+        if (daystaken.length > 0) daystaken += ' and ';
+        daystaken += `${hours} hour${hours > 1 ? 's' : ''}`;
+      }
+
+      //time calculate
+
+
       const work_id = query[0].Sap_workitem_id;
 
       const client = 'sb-f5db712d-7e56-4659-8aa0-a43859ddd675!b449023|xsuaa!b49390';
@@ -441,9 +500,8 @@ module.exports = cds.service.impl(async function () {
         });
 
       // var curr_level = existingRecord.Notification_Status;
-      if(existingRecord.Notification_Status.length>0)
-      {
-      var curr_level = parseInt(existingRecord.Notification_Status, 10) + 1;
+      if (existingRecord.Notification_Status.length > 0) {
+        var curr_level = parseInt(existingRecord.Notification_Status, 10) + 1;
       }
       else {
         curr_level = 1;
@@ -452,11 +510,22 @@ module.exports = cds.service.impl(async function () {
         .where({
           PAN_Number: req.data.data,
           Employee_Name: mail,
-          level: curr_level.toString() 
+          level: curr_level.toString()
         })
         .with({
-          Remarks: "Rejected"
+          Remarks: `Rejected by ${mail}`,
+          Approved_by: mail,
+          Notification_Status: null,
+          End_DateAND_Time: new Date(),
+          Days_Taken: daystaken
+
         });
+
+      const updpandet = await UPDATE(PAN_Details_APR).where({
+        PAN_Number: req.data.data,
+      }).with({
+        status: `Rejected by ${mail}`
+      })
 
       console.log(updateResult, "updated as rejected")
 

@@ -6,7 +6,20 @@ sap.ui.define([
     return {
         Approve: async function (oEvent) {
             debugger
-            var email = "rajendraakshay1@gmail.com"
+            sap.m.MessageToast.show("Approved", {
+                width: "15em",
+                my: "center bottom",
+                at: "center bottom"
+            });
+            
+            // Show busy dialog after toast is shown
+            let oBusyDialog = new sap.m.BusyDialog({
+                title: "Processing Approval",
+                text: "Please wait..."
+            });
+            oBusyDialog.open();
+            var email = sap.ushell.Container.getUser().getEmail();
+            // var email = "rajendraakshay1@gmail.com"
             var textarea = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Textarea--textareafrag");
             if (textarea.getValue().length > 0) {
                 var id = location.href;
@@ -40,21 +53,9 @@ sap.ui.define([
 
                 // const oRouter = this.getOwnerComponent().getRouter();
                 // oRouter.navTo("PAN_Details_APRList");
-                sap.m.MessageToast.show("Approved", {
-                    duration: 3000,
-                    width: "15em",
-                    my: "center bottom",
-                    at: "center bottom"
-                });
-                
-                // Show busy dialog after toast is shown
-                let oBusyDialog = new sap.m.BusyDialog({
-                    title: "Processing Approval",
-                    text: "Please wait..."
-                });
+               
 
-                oBusyDialog.open();
-
+               
                 // Automatically close after 2 seconds (optional)
                 setTimeout(function () {
                     oBusyDialog.close();
