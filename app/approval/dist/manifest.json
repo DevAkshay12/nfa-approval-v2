@@ -205,6 +205,16 @@
                                                 "placement": "After",
                                                 "anchor": "Approve"
                                             }
+                                        },
+                                        "needforclarification": {
+                                            "press": "approval.ext.controller.Clarify.clarify",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Need For Clarification",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "Approve"
+                                            }
                                         }
                                     }
                                 }

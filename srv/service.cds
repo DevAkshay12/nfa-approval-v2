@@ -2,7 +2,7 @@ using { proj_schema as my } from '../db/schema';
 @requires: 'authenticated-user'
 service CatalogService {
      @odata.draft.enabled
- entity tab1 as projection on my.PAN_Details where created_by = 'rajendraakshay1@gmail.com' and ltrim(rtrim(task_id))!='';
+ entity tab1 as projection on my.PAN_Details where ltrim(rtrim(task_id))!='';
 //  entity tab1 as projection on my.PAN_Details where created_by = $user and ltrim(rtrim(task_id))!='';
  entity tab2 as projection on my.PAN_WEB_EVENT;
   entity tab3 as projection on my.PAN_TYPE;
@@ -37,4 +37,5 @@ service PanApproval {
  function approve(data:String,email:String) returns String;
  function wf_data(panno:String,comment : String) returns String;
  function reject(data:String,email:String) returns String;
+ function clarify(panno:String) returns String;
 }

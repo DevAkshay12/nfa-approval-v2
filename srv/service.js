@@ -237,9 +237,11 @@ module.exports = cds.service.impl(async function () {
       const currentDate = new Date(); // now
 
       const diffMs = currentDate - submittedDate; // difference in milliseconds
-      const totalHours = Math.floor(diffMs / (1000 * 60 * 60)); // total hours
+      const totalMinutes = Math.floor(diffMs / (1000 * 60)); // total minutes
+      const totalHours = Math.floor(totalMinutes / 60); // total hours
       const days = Math.floor(totalHours / 24);
       const hours = totalHours % 24;
+      const minutes = totalMinutes % 60;
 
       let daystaken = '';
       if (days > 0) {
@@ -249,6 +251,13 @@ module.exports = cds.service.impl(async function () {
         if (daystaken.length > 0) daystaken += ' and ';
         daystaken += `${hours} hour${hours > 1 ? 's' : ''}`;
       }
+      if (minutes > 0 || daystaken.length === 0) {
+        if (daystaken.length > 0) daystaken += ' and ';
+        daystaken += `${minutes} minute${minutes > 1 ? 's' : ''}`;
+      }
+
+      console.log(daystaken);
+
 
       //time calculate
 
@@ -323,8 +332,8 @@ module.exports = cds.service.impl(async function () {
         }).with({
           Remarks: `Approved by ${mail}`,
           Approved_by: mail,
-          End_DateAND_Time : new Date() ,
-          Days_Taken : daystaken
+          End_DateAND_Time: new Date(),
+          Days_Taken: daystaken
           // Notification_Status : rowToApprove.idd
         });
 
@@ -442,12 +451,15 @@ module.exports = cds.service.impl(async function () {
       });
 
       //time calculate
-      const submittedDate = new Date(query[0].submitted_date); // from DB
+      const submittedDate = new Date(queryResult[0].submitted_date); // from DB
       const currentDate = new Date(); // now
+
       const diffMs = currentDate - submittedDate; // difference in milliseconds
-      const totalHours = Math.floor(diffMs / (1000 * 60 * 60)); // total hours
+      const totalMinutes = Math.floor(diffMs / (1000 * 60)); // total minutes
+      const totalHours = Math.floor(totalMinutes / 60); // total hours
       const days = Math.floor(totalHours / 24);
       const hours = totalHours % 24;
+      const minutes = totalMinutes % 60;
 
       let daystaken = '';
       if (days > 0) {
@@ -457,6 +469,12 @@ module.exports = cds.service.impl(async function () {
         if (daystaken.length > 0) daystaken += ' and ';
         daystaken += `${hours} hour${hours > 1 ? 's' : ''}`;
       }
+      if (minutes > 0 || daystaken.length === 0) {
+        if (daystaken.length > 0) daystaken += ' and ';
+        daystaken += `${minutes} minute${minutes > 1 ? 's' : ''}`;
+      }
+
+      console.log(daystaken);
 
       //time calculate
 
@@ -547,6 +565,16 @@ module.exports = cds.service.impl(async function () {
       console.log(error);
     }
 
+  })
+
+  this.on('clarify',async(req)=>{
+    var pan_no = req.data.panno;
+    const wf = await UPDATE(PAN_Details_APR)
+    .where({ PAN_Number: req.data.panno })
+    .with({
+      status: 'need for clarification'
+    });
+    return "updated as need for clarification"
   })
 
 })

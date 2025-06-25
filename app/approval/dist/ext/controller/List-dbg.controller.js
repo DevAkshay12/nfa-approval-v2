@@ -34,13 +34,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				//             reject(err);  // Handle error if the AJAX request fails
 				//         });
 				// 	})
-				var name = sap.ushell.Container.getUser().getEmail();
+				// var name = sap.ushell.Container.getUser().getEmail();
 				var busy = new sap.m.BusyDialog({
 					title: "Please wait",
 					text: "Loading data...",
 				})
 				busy.open();
-				// var name = "rajendraakshay1@gmail.com";
+				var name = "akshay.br@peolsolutions.com";
 				var cFunction = this.base.getModel().bindContext(`/${'getdata'}(...)`);
 				cFunction.setParameter("data", name);
 				await cFunction.execute();

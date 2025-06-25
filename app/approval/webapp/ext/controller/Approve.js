@@ -6,11 +6,7 @@ sap.ui.define([
     return {
         Approve: async function (oEvent) {
             debugger
-            sap.m.MessageToast.show("Approved", {
-                width: "15em",
-                my: "center bottom",
-                at: "center bottom"
-            });
+           
             
             // Show busy dialog after toast is shown
             let oBusyDialog = new sap.m.BusyDialog({
@@ -58,6 +54,11 @@ sap.ui.define([
                
                 // Automatically close after 2 seconds (optional)
                 setTimeout(function () {
+                    sap.m.MessageToast.show("Approved", {
+                        width: "15em",
+                        my: "center bottom",
+                        at: "center bottom"
+                    });
                     oBusyDialog.close();
                     window.history.go(-2);
                 }, 2000);
