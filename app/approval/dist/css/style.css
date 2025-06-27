@@ -1,19 +1,121 @@
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FooterBar\:\:CustomAction\:\:Approve
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory-innerTable,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FacetSubSection\:\:VendorResponseDetails-innerGrid,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails-innerTable,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FacetSubSection\:\:TermsandConditions-innerGrid,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails-innerTable
 {
-    /* border-radius: 8px;
-    font-size: 1rem;
-
-    background-color: #3ab71b; 
-    color: white !important;
-    border: none; */
+    background: linear-gradient(to bottom right, 	#b7d3ef, #6993db); /* soft Fiori Horizon background */
+  border: 1px solid #d0e2f2;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FooterBar\:\:CustomAction\:\:Reject
+/* vendor obj page2 */
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Proposed_Vendor_Code,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Order_Value_BKTIn_Project_CurrencyBKT,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_GST_Number,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Project_CurrencyORBase_Currency,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_CE_Date,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Destination_State_BKTShipDASHto_LocationBKT,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Technical_Committee_who_cleared_the_proposal,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_CE_Score,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Order_Value_BKTIn_Bid_CurrencyBKT,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Contact_PersonDASH2,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Final_Quotation_Date,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_References_to_be_displayed_in_Order,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Supplier_Origin_State,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Final_Quotation_Amount,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_PE_Score,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Order_CurrencyORBid_currency,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Contact_PersonDASH1,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Commercial_Committee_who_cleared_the_proposal,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Incoterms,
+/*  */
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:PAN_Number,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Order_CurrencyORBid_currency,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:RFP_Number,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:BUORPurchasing_Group,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Split_OrderORNo_of_vendors,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Final_proposed_Value,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:RFP_Publish_Date,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Plant_Code,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Order_Location_OR_Plant,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Savings_achieved_btw_initial_and_final_quote,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Time_Taken_for_FinalizationDASHIn_DAYS,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Project_Description,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Base_line_spend,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Savings_against_base_line_spend_of_RFP,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:status,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:PR_NumberBKTsBKT,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Project_CurrencyORBase_Currency,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Number_of_Vendors_Shortlisted_for_RFP,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:number_of_vendors_invited,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Subject_of_ProposalOROrder
 {
-    border-radius: 8px;
-    font-size: 1rem;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 4px 5px;
+    padding-top: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+    display: inline-block;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: default; /* Optional: gives feedback that hover is allowed */
+    margin-right: 12px;  /* Horizontal gap between boxes */
+    margin-bottom: 12px;
+}
 
-    background-color: #d70e0e; 
-    color: white !important;
-    border: none;
+/* last sec */
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:Item_Code-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:HSN_OR_SAC_Code-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:Item_Short_Description-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:UOM-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:Quantity-innerColumn,
+/*  */
+/* payment terms det */
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:iddd-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Percentage-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Description-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Due_date-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Mandatory_Documents_OR_Submissions-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:To_be_certified_in_Company-innerColumn,
+#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Payment_methord-innerColumn,
+/*  */
+/* vendor reponse det */
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Awarded_Vendor-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Vendor_Name-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Original_quote-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Final_Quote-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Vendor_Location-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Order_amount_OR_Split_order_amount-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Discount_Amount-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Discount_percentage-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Rank-innerColumn,
+/*  */
+/* event */
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:eventNo-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:date-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:numberOfVendorsParticipated-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:l1AmountObtained-innerColumn,
+#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:number-innerColumn
+{
+    background: linear-gradient(to right, #eef0ff, #e2e6f8); /* lavender-indigo gradient */
+  color: #2e2a5c; /* deep indigo */
+  font-weight: 600;
+  font-family: "72", "Segoe UI", "Roboto", sans-serif;
+  font-size: 14px;
+  border-top: 1px solid black;
+  border-left: 1px solid black; /* muted indigo */
+  border-right: 1px solid black;
+  text-align: left;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  box-shadow: inset 0 -1px 0 black;
+  transition: all 0.3s ease-in-out;
 }

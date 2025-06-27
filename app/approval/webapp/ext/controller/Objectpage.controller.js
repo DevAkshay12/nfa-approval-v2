@@ -21,6 +21,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			routing: {
 				onAfterBinding: async function (oEvent) {
 					debugger
+					this.getView().byId("approval::PAN_Details_APRObjectPage--fe::FooterBar::CustomAction::Approve").setType("Success")
+					this.getView().byId("approval::PAN_Details_APRObjectPage--fe::FooterBar::CustomAction::needforclarification").setType("Critical")
+					this.getView().byId("approval::PAN_Details_APRObjectPage--fe::FooterBar::CustomAction::Reject").setType("Negative")
 					baseuri = this.getView().getParent().getAppComponent().getManifestObject()._oBaseUri._string;
 					debugger
 					var workflow_table = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Workflow--sampleTable");

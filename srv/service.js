@@ -451,7 +451,7 @@ module.exports = cds.service.impl(async function () {
       });
 
       //time calculate
-      const submittedDate = new Date(queryResult[0].submitted_date); // from DB
+      const submittedDate = new Date(query[0].submitted_date); // from DB
       const currentDate = new Date(); // now
 
       const diffMs = currentDate - submittedDate; // difference in milliseconds

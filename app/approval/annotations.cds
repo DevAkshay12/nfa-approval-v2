@@ -482,22 +482,197 @@ annotate service.PAN_vendor_data_APR with @(
     UI.FieldGroup #VendorResponse : {
         $Type : 'UI.FieldGroupType',
         Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : Proposed_Vendor_Code,
+                Label : 'Proposed_Vendor_Code',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_CE_Date,
+                Label : 'Vendor_CE_Date',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Order_Value_BKTIn_Bid_CurrencyBKT,
+                Label : 'Order_Value_BKTIn_Bid_CurrencyBKT',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Supplier_Origin_State,
+                Label : 'Supplier_Origin_State',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_Contact_PersonDASH1,
+                Label : 'Vendor_Contact_PersonDASH1',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Order_Value_BKTIn_Project_CurrencyBKT,
+                Label : 'Order_Value_BKTIn_Project_CurrencyBKT',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Destination_State_BKTShipDASHto_LocationBKT,
+                Label : 'Destination_State_BKTShipDASHto_LocationBKT',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_Contact_PersonDASH2,
+                Label : 'Vendor_Contact_PersonDASH2',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_Final_Quotation_Amount,
+                Label : 'Vendor_Final_Quotation_Amount',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_GST_Number,
+                Label : 'Vendor_GST_Number',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Technical_Committee_who_cleared_the_proposal,
+                Label : 'Technical_Committee_who_cleared_the_proposal',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_Final_Quotation_Date,
+                Label : 'Vendor_Final_Quotation_Date',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_PE_Score,
+                Label : 'Vendor_PE_Score',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Commercial_Committee_who_cleared_the_proposal,
+                Label : 'Commercial_Committee_who_cleared_the_proposal',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Project_CurrencyORBase_Currency,
+                Label : 'Project_CurrencyORBase_Currency',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_CE_Score,
+                Label : 'Vendor_CE_Score',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Vendor_References_to_be_displayed_in_Order,
+                Label : 'Vendor_References_to_be_displayed_in_Order',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Order_CurrencyORBid_currency,
+                Label : 'Order_CurrencyORBid_currency',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Incoterms,
+                Label : 'Incoterms',
+            },
         ],
     },
     UI.FieldGroup #TermsandConditions : {
         $Type : 'UI.FieldGroupType',
         Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : Scope_and_Responsibilities,
+                Label : 'Scope_and_Responsibilities',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Compliance_Terms,
+                Label : 'Compliance_Terms',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Commercial_Terms,
+                Label : 'Commercial_Terms',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Others,
+                Label : 'Others',
+            },
         ],
     },
 );
 
 annotate service.PAN_PAYMENT_TERM_DETAILS_APR with @(
     UI.LineItem #PaymentTermDetails : [
+        {
+            $Type : 'UI.DataField',
+            Value : iddd,
+            Label : 'iddd',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Percentage,
+            Label : 'Percentage',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Description,
+            Label : 'Description',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Due_date,
+            Label : 'Due_date',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Mandatory_Documents_OR_Submissions,
+            Label : 'Mandatory_Documents_OR_Submissions',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : To_be_certified_in_Company,
+            Label : 'To_be_certified_in_Company',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Payment_methord,
+            Label : 'Payment_methord',
+        },
     ]
 );
 
 annotate service.PAN_PRICE_DETAILS_APR with @(
     UI.LineItem #ItemDetails : [
+        {
+            $Type : 'UI.DataField',
+            Value : Item_Code,
+            Label : 'Item_Code',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : HSN_OR_SAC_Code,
+            Label : 'HSN_OR_SAC_Code',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Item_Short_Description,
+            Label : 'Item_Short_Description',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : UOM,
+            Label : 'UOM',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Quantity,
+            Label : 'Quantity',
+        },
     ]
 );
 
