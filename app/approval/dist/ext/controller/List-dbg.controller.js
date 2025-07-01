@@ -40,6 +40,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					text: "Loading data...",
 				})
 				busy.open();
+				// var name = "rajendraakshay1@gmail.com";
 				// var name = "akshay.br@peolsolutions.com";
 				var cFunction = this.base.getModel().bindContext(`/${'getdata'}(...)`);
 				cFunction.setParameter("data", name);

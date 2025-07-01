@@ -5,10 +5,10 @@
 #   "data": "Doc1025528402"
 # }
 
-GET http://localhost:4004/odata/v4/pan-approval/wf_data
+GET http://localhost:4004/odata/v4/pan-approval/approve
 Content-Type: application/json
 
 {
-  "panno": "Doc1025528402",
-  "comment" : "demo comment"
+  "data": "Doc78427498",
+  "email" : "rajendraakshay1@gmail.com"
 }

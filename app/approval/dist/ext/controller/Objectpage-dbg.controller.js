@@ -1,6 +1,17 @@
 sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExtension) {
 	'use strict';
 	var baseuri;
+	var panNumber;
+	const regex = /PAN_Details_APR\('([^']+)'\)/;
+	const url = location.href;
+	const match = url.match(regex);
+
+	if (match) {
+		panNumber = match[1]; // Extracted PAN Number
+		console.log(panNumber); // Output: Doc78427498
+	} else {
+		console.log("PAN Number not found");
+	}
 	return ControllerExtension.extend('approval.ext.controller.Objectpage', {
 		// this section allows to extend lifecycle hooks or hooks provided by Fiori elements
 		override: {
@@ -10,6 +21,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			 * @memberOf approval.ext.controller.Objectpage
 			 */
 			onInit: function () {
+				debugger
 				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
 				var oModel = this.base.getExtensionAPI().getModel();
 			},
@@ -27,9 +39,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					baseuri = this.getView().getParent().getAppComponent().getManifestObject()._oBaseUri._string;
 					debugger
 					var workflow_table = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Workflow--sampleTable");
-					workflow_table.addStyleClass("workFlowTable");
+					workflow_table.addStyleClass("cc");
 					var settings = {
-						url: baseuri + "odata/v4/catalog/WORKFLOW_HISTORY",  // URL for fetching the data
+						url: baseuri + "odata/v4/pan-approval/PAN_WORKFLOW_HISTORY_APR?$filter=PAN_Number eq '" + panNumber + "'",  // URL for fetching the data
 						// url: "/odata/v4/pan-approval/PAN_WORKFLOW_HISTORY_APR",  // URL for fetching the data
 						method: "GET",  // Use GET method to fetch data
 						headers: {

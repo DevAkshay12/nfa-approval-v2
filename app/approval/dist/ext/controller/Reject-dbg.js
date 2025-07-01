@@ -58,7 +58,7 @@ sap.ui.define([
                             console.log(wf_result);
 
                             var email = sap.ushell.Container.getUser().getEmail();
-                            // var email = "rajendraakshay1@gmail.com"
+                            // var email = "akshay.br@peolsolutions.com"
                             var rej_func = this._view.getModel().bindContext(`/${'reject'}(...)`);
                             rej_func.setParameter("data", val[1]);
                             rej_func.setParameter("email", email);

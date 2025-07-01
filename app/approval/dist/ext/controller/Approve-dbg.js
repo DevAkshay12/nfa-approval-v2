@@ -15,7 +15,7 @@ sap.ui.define([
             });
             oBusyDialog.open();
             var email = sap.ushell.Container.getUser().getEmail();
-            // var email = "rajendraakshay1@gmail.com"
+            // var email = "akshay.br@peolsolutions.com"
             var textarea = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Textarea--textareafrag");
             if (textarea.getValue().length > 0) {
                 var id = location.href;

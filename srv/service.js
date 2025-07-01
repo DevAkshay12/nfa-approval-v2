@@ -6,24 +6,15 @@ module.exports = cds.service.impl(async function () {
   const { PAN_Details_APR, PAN_WORKFLOW_HISTORY_APR, PAN_Comments_APR } = this.entities;
 
   this.on('getdata', async (req) => {
-
+    debugger
     var name = req.data.data;
     const statusRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR).where({
       Employee_Name: name
     });
-
-    if (!statusRecord) return null;
-
-    let currentStatus = 0;
-    if (statusRecord.Notification_Status && !isNaN(statusRecord.Notification_Status)) {
-      currentStatus = parseInt(statusRecord.Notification_Status, 10);
-    }
-
-    const nextLevel = (currentStatus + 1).toString();
-
     const queryResult = await SELECT.from(PAN_WORKFLOW_HISTORY_APR).where({
       Employee_Name: name,
-      level: nextLevel
+      Remarks: "pending for Approval"
+
     });
 
 
@@ -216,150 +207,127 @@ module.exports = cds.service.impl(async function () {
 
   this.on('approve', async (req) => {
     try {
-      var mail = req.data.email;
-      debugger
-      // Fetch data from PAN_Details_APR
+      const mail = req.data.email;
+  
+      // Fetch PAN details
       const queryResult = await SELECT.from(PAN_Details_APR).where({
-        PAN_Number: req.data.data,
+        PAN_Number: req.data.data
       });
-
-      // Fetch workflow history for the PAN_Number
-      const workflow = await SELECT.from(PAN_WORKFLOW_HISTORY_APR).where({
-        PAN_Number: req.data.data,
-      });
-
-
-
-
-
-      //time calculate
-      const submittedDate = new Date(queryResult[0].submitted_date); // from DB
-      const currentDate = new Date(); // now
-
-      const diffMs = currentDate - submittedDate; // difference in milliseconds
-      const totalMinutes = Math.floor(diffMs / (1000 * 60)); // total minutes
-      const totalHours = Math.floor(totalMinutes / 60); // total hours
-      const days = Math.floor(totalHours / 24);
-      const hours = totalHours % 24;
-      const minutes = totalMinutes % 60;
-
-      let daystaken = '';
-      if (days > 0) {
-        daystaken += `${days} day${days > 1 ? 's' : ''}`;
-      }
-      if (hours > 0) {
-        if (daystaken.length > 0) daystaken += ' and ';
-        daystaken += `${hours} hour${hours > 1 ? 's' : ''}`;
-      }
-      if (minutes > 0 || daystaken.length === 0) {
-        if (daystaken.length > 0) daystaken += ' and ';
-        daystaken += `${minutes} minute${minutes > 1 ? 's' : ''}`;
-      }
-
-      console.log(daystaken);
-
-
-      //time calculate
-
-
-
-
-
-      // Check if data exists and Sap_workitem_id is present
+  
       if (!queryResult || queryResult.length === 0 || !queryResult[0].Sap_workitem_id) {
         return "No work item ID found";
       }
-
+  
       const workid = queryResult[0].Sap_workitem_id;
-      console.log("Query Result:", queryResult);
-
-      // Find workflow row with lowest level and remarks = "pending for approval"
-      const pendingWorkflows = workflow.filter(item => item.Remarks === "pending for Approval");
-      const rowToApprove = pendingWorkflows.reduce((min, item) => {
-        return (!min || item.level < min.level) ? item : min;
-      }, null);
-
-      if (!rowToApprove) {
+  
+      // Fetch workflow for the current approver
+      const workflow = await SELECT.from(PAN_WORKFLOW_HISTORY_APR).where({
+        PAN_Number: req.data.data,
+        Employee_Name: mail,
+        Remarks: "pending for Approval"
+      });
+  
+      if (workflow.length === 0) {
         return "No pending workflow to approve";
       }
-
-      // Authentication for token generation
+  
+      // Calculate time taken
+      const submittedDate = new Date(queryResult[0].submitted_date);
+      const currentDate = new Date();
+      const diffMs = currentDate - submittedDate;
+      const totalMinutes = Math.floor(diffMs / (1000 * 60));
+      const totalHours = Math.floor(totalMinutes / 60);
+      const days = Math.floor(totalHours / 24);
+      const hours = totalHours % 24;
+      const minutes = totalMinutes % 60;
+  
+      let daystaken = '';
+      if (days > 0) daystaken += `${days} day${days > 1 ? 's' : ''}`;
+      if (hours > 0) daystaken += `${daystaken ? ' and ' : ''}${hours} hour${hours > 1 ? 's' : ''}`;
+      if (minutes > 0 || !daystaken) daystaken += `${daystaken ? ' and ' : ''}${minutes} minute${minutes > 1 ? 's' : ''}`;
+  
+      // Token Generation
       const client = 'sb-f5db712d-7e56-4659-8aa0-a43859ddd675!b449023|xsuaa!b49390';
       const secret = '8dbe1dd1-2557-49e7-938d-3cb18bb0b753$bqbpGc9HXFf9XSFuSSXM9RH4V-FUh_J3_OL-tZ4uqUM=';
-      const auth1 = Buffer.from(client + ':' + secret, 'utf-8').toString('base64');
-
-      // Fetch access token
+      const auth1 = Buffer.from(`${client}:${secret}`, 'utf-8').toString('base64');
+  
       const response1 = await axios.request('https://d6a19604trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials', {
         method: 'POST',
         headers: {
           'Authorization': 'Basic ' + auth1
         }
       });
-
+      
+      await new Promise(resolve => setTimeout(resolve, 1500));
       const accessToken = response1.data.access_token;
-
-      // Fetch workflow instances for the workitem
+  
+      // Fetch subprocesses
       const postbpa = await axios.request({
         method: 'GET',
         url: `https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances?parentId=${workid}`,
         headers: {
-          'Authorization': 'Bearer ' + accessToken,
+          'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
       });
-
-      console.log("Workflow Instances:", postbpa.data);
-
-      // Filter subprocesses and main processes
+  
       const subprocessArray = postbpa.data.filter(item => item.subject === "nfasubprocess");
-      const processArray = postbpa.data.filter(item => item.subject === "nfaprocess");
-
-      // Cancel subprocess if it exists - ONLY AFTER THIS update remarks
+  
       if (subprocessArray.length > 0) {
+        // Cancel subprocess
         await axios.request({
           url: `https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances/${subprocessArray[0].id}`,
           method: 'PATCH',
           headers: {
-            'Authorization': 'Bearer ' + accessToken,
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
           },
           data: { status: 'CANCELED' },
         });
-
-        // Now update remarks to "approved" after successful cancellation
-        var res = await UPDATE(PAN_WORKFLOW_HISTORY_APR, {
-          idd: rowToApprove.idd
+  
+        console.log("Subprocess cancelled");
+  
+        // ⏳ Delay to ensure BPA has time to react
+        await new Promise(resolve => setTimeout(resolve, 2000));
+  
+        // Update approval for current level
+        await UPDATE(PAN_WORKFLOW_HISTORY_APR, {
+          level: workflow[0].level,
+          PAN_Number: req.data.data
         }).with({
           Remarks: `Approved by ${mail}`,
           Approved_by: mail,
           End_DateAND_Time: new Date(),
           Days_Taken: daystaken
-          // Notification_Status : rowToApprove.idd
         });
-
-
-
-
-        //june 1 updated
-
-        //june 1 2001
-
-
-        let newStatus = "1"; // default if no value
-        let shouldUpdate = false;
-
-        // Step 1: Fetch the existing record
+  
+        // Trigger next level approval
+        const nextLevel = parseInt(workflow[0].level, 10) + 1;
+        const nextApprover = await SELECT.from(PAN_WORKFLOW_HISTORY_APR).where({
+          PAN_Number: req.data.data,
+          level: nextLevel.toString()
+        });
+  
+        if (nextApprover) {
+          await UPDATE(PAN_WORKFLOW_HISTORY_APR, {
+            PAN_Number: req.data.data,
+            level: nextLevel.toString()
+          }).with({
+            Remarks: "pending for Approval",
+            Begin_DateAND_Time: new Date()
+          });
+        }
+  
+        // Optional: Notification_Status increment logic
         const existingRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR)
           .where({ PAN_Number: req.data.data });
-
-        console.log(existingRecord, "selected workflow history data only one")
-
-        // Step 2: Decide whether to update
+  
+        let newStatus = "1";
+        let shouldUpdate = false;
+  
         if (existingRecord) {
           const status = existingRecord.Notification_Status;
           if (!status || status.trim() === "") {
-            // First time, set to "1"
-            newStatus = "1";
             shouldUpdate = true;
           } else {
             const currentStatus = parseInt(status, 10);
@@ -369,83 +337,66 @@ module.exports = cds.service.impl(async function () {
             }
           }
         }
-
-        // Step 3: Update only if required
+  
         if (shouldUpdate) {
-          const wf = await UPDATE(PAN_WORKFLOW_HISTORY_APR)
+          await UPDATE(PAN_WORKFLOW_HISTORY_APR)
             .where({ PAN_Number: req.data.data })
-            .with({
-              // Employee_ID: mail,
-              Notification_Status: newStatus
-            });
-
-          console.log("Updated record:", wf);
-        } else {
-          console.log("No update needed.");
+            .with({ Notification_Status: newStatus });
         }
-        //june 1 2001
-
-
-        //june 1 updated
-
-
-
-
-
-
+  
       } else {
-        // If no subprocess to cancel, do NOT update remarks yet
         return "No subprocess found to cancel";
       }
-
-
-
-
-
-
-
-
-      // Check if the main process is completed
+  
+      // If process is fully complete
       const process_stop = await axios.request({
         url: `https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances/${workid}`,
         method: 'GET',
         headers: {
-          'Authorization': 'Bearer ' + accessToken,
+          'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
       });
-
-      if (process_stop.data.status && process_stop.data.status.status === "COMPLETED") {
-        // Clear Sap_workitem_id when process is done
-        var id_null = await UPDATE(PAN_Details_APR, {
+  
+      if (process_stop.data.status === "COMPLETED") {
+        await UPDATE(PAN_Details_APR, {
           PAN_Number: req.data.data
         }).with({
           Sap_workitem_id: null,
           status: `Approved by ${mail}`
         });
-
-        const update_status = await UPDATE(PAN_WORKFLOW_HISTORY_APR)
+  
+        await UPDATE(PAN_WORKFLOW_HISTORY_APR)
           .where({ PAN_Number: req.data.data })
-          .with({
-            Notification_Status: null
-          });
-        console.log(id_null, "id is made null")
-
+          .with({ Notification_Status: null });
+  
         return "Process completed";
       }
-
-      return `Approved level ${rowToApprove.level} and subprocess cancelled`;
+  
+      return `Approved level ${workflow[0].level} and subprocess cancelled`;
+  
     } catch (error) {
       console.error('Error processing approval:', error);
       return "An error occurred during approval";
     }
   });
+  
 
 
   this.on('reject', async (req) => {
     debugger
     try {
+
       var mail = req.data.email;
+      const existingRecord = await SELECT.from(PAN_WORKFLOW_HISTORY_APR)
+        .where({
+          PAN_Number: req.data.data,
+          Employee_Name: mail,
+          Remarks: "pending for Approval"
+        });
+      if (existingRecord.length == 0) {
+        return "no record found"
+      }
       const query = await SELECT.from(PAN_Details_APR).where({
         PAN_Number: req.data.data
       });
@@ -511,24 +462,13 @@ module.exports = cds.service.impl(async function () {
       console.log(cancel_bpa);
 
 
-      const existingRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR)
-        .where({
-          PAN_Number: req.data.data,
-          Employee_Name: mail
-        });
 
-      // var curr_level = existingRecord.Notification_Status;
-      if (existingRecord.Notification_Status.length > 0) {
-        var curr_level = parseInt(existingRecord.Notification_Status, 10) + 1;
-      }
-      else {
-        curr_level = 1;
-      }
+
       const updateResult = await UPDATE(PAN_WORKFLOW_HISTORY_APR)
         .where({
           PAN_Number: req.data.data,
           Employee_Name: mail,
-          level: curr_level.toString()
+          level: existingRecord[0].level
         })
         .with({
           Remarks: `Rejected by ${mail}`,
@@ -567,13 +507,13 @@ module.exports = cds.service.impl(async function () {
 
   })
 
-  this.on('clarify',async(req)=>{
+  this.on('clarify', async (req) => {
     var pan_no = req.data.panno;
     const wf = await UPDATE(PAN_Details_APR)
-    .where({ PAN_Number: req.data.panno })
-    .with({
-      status: 'need for clarification'
-    });
+      .where({ PAN_Number: req.data.panno })
+      .with({
+        status: 'need for clarification'
+      });
     return "updated as need for clarification"
   })
 
