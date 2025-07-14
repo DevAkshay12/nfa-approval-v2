@@ -28,20 +28,25 @@ module.exports = cds.service.impl(async function () {
           'Authorization': 'Basic ' + auth1
         }
       });
+      const token = response1.data.access_token;
 
-      const postbpa = await axios.request(`https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances?parentId=${queryResult[0].Employee_ID}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + response1.data.access_token,
-          'Content-Type': 'application/json'
-        },
-      });
-      if (postbpa.data.length > 0) {
-        return queryResult;
+      // Loop through all entries to check if BPA instance exists
+      const validDocs = [];
+      for (const entry of queryResult) {
+        const postbpa = await axios.request(`https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances?parentId=${entry.Employee_ID}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          },
+        });
+        if (postbpa.data.length > 0) {
+          validDocs.push(entry);
+        }
       }
-      else return null;
+      return validDocs;
     }
-    else return null;
+    else return [];
   });
 
   //   this.on('approve', async (req) => {
@@ -195,7 +200,7 @@ module.exports = cds.service.impl(async function () {
   // });
 
   this.on('wf_data', async (req) => {
-    wf_query = await INSERT.into(PAN_Comments_APR).entries({
+    var wf_query = await INSERT.into(PAN_Comments_APR).entries({
       PAN_Number: req.data.panno,
       Comments: req.data.comment
     });
@@ -206,31 +211,32 @@ module.exports = cds.service.impl(async function () {
 
 
   this.on('approve', async (req) => {
+    debugger
     try {
       const mail = req.data.email;
-  
+
       // Fetch PAN details
       const queryResult = await SELECT.from(PAN_Details_APR).where({
         PAN_Number: req.data.data
       });
-  
+
       if (!queryResult || queryResult.length === 0 || !queryResult[0].Sap_workitem_id) {
         return "No work item ID found";
       }
-  
+
       const workid = queryResult[0].Sap_workitem_id;
-  
+
       // Fetch workflow for the current approver
       const workflow = await SELECT.from(PAN_WORKFLOW_HISTORY_APR).where({
         PAN_Number: req.data.data,
         Employee_Name: mail,
         Remarks: "pending for Approval"
       });
-  
+
       if (workflow.length === 0) {
         return "No pending workflow to approve";
       }
-  
+
       // Calculate time taken
       const submittedDate = new Date(queryResult[0].submitted_date);
       const currentDate = new Date();
@@ -240,28 +246,25 @@ module.exports = cds.service.impl(async function () {
       const days = Math.floor(totalHours / 24);
       const hours = totalHours % 24;
       const minutes = totalMinutes % 60;
-  
+
       let daystaken = '';
       if (days > 0) daystaken += `${days} day${days > 1 ? 's' : ''}`;
       if (hours > 0) daystaken += `${daystaken ? ' and ' : ''}${hours} hour${hours > 1 ? 's' : ''}`;
       if (minutes > 0 || !daystaken) daystaken += `${daystaken ? ' and ' : ''}${minutes} minute${minutes > 1 ? 's' : ''}`;
-  
+
       // Token Generation
       const client = 'sb-f5db712d-7e56-4659-8aa0-a43859ddd675!b449023|xsuaa!b49390';
       const secret = '8dbe1dd1-2557-49e7-938d-3cb18bb0b753$bqbpGc9HXFf9XSFuSSXM9RH4V-FUh_J3_OL-tZ4uqUM=';
       const auth1 = Buffer.from(`${client}:${secret}`, 'utf-8').toString('base64');
-  
+
       const response1 = await axios.request('https://d6a19604trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials', {
         method: 'POST',
         headers: {
           'Authorization': 'Basic ' + auth1
         }
       });
-      
-      await new Promise(resolve => setTimeout(resolve, 1500));
+
       const accessToken = response1.data.access_token;
-  
-      // Fetch subprocesses
       const postbpa = await axios.request({
         method: 'GET',
         url: `https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances?parentId=${workid}`,
@@ -270,9 +273,15 @@ module.exports = cds.service.impl(async function () {
           'Content-Type': 'application/json',
         },
       });
-  
-      const subprocessArray = postbpa.data.filter(item => item.subject === "nfasubprocess");
-  
+
+      // const subprocessArray = postbpa.data.filter(item => item.subject === "nfasubprocess");
+      const subprocessArray = postbpa.data.filter(item =>
+        item.subject === "nfasubprocess" &&
+        item.parentInstanceId === workid &&
+        item.status === "RUNNING"
+      );
+      console.log(subprocessArray);
+      await new Promise(resolve => setTimeout(resolve, 1000));
       if (subprocessArray.length > 0) {
         // Cancel subprocess
         await axios.request({
@@ -284,30 +293,65 @@ module.exports = cds.service.impl(async function () {
           },
           data: { status: 'CANCELED' },
         });
-  
-        console.log("Subprocess cancelled");
-  
+
+        ////////////////////////////////////////////////////////////////polling///////////////////////////////////////////////
+        let retries = 5;
+        let delayMs = 1000;
+        let isCancelled = false;
+        for (let i = 0; i < retries; i++) {
+          await new Promise(resolve => setTimeout(resolve, delayMs)); // wait before checking
+
+          const check = await axios.get(
+            `https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances/${subprocessArray[0].id}`,
+            {
+              headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              }
+            }
+          );
+
+          console.log(`Poll ${i + 1}: status = ${check.data.status}`);
+
+          if (check.data.status === "CANCELED") {
+            isCancelled = true;
+            break;
+          }
+        }
+
+        if (!isCancelled) {
+          console.warn("Subprocess was not confirmed canceled in time.");
+          return "Subprocess cancel confirmation failed. Please try again.";
+        }
+
+        console.log("✅ Subprocess cancel confirmed. Proceeding...");
+        ////////////////////////////////////////////////////////////////polling///////////////////////////////////////////////
+
+
+
+
         // ⏳ Delay to ensure BPA has time to react
-        await new Promise(resolve => setTimeout(resolve, 2000));
-  
+        // await new Promise(resolve => setTimeout(resolve, 2500));
+        console.log("Subprocess cancelled");
+
         // Update approval for current level
         await UPDATE(PAN_WORKFLOW_HISTORY_APR, {
           level: workflow[0].level,
           PAN_Number: req.data.data
         }).with({
-          Remarks: `Approved by ${mail}`,
+          Remarks: `Approved`,
           Approved_by: mail,
           End_DateAND_Time: new Date(),
           Days_Taken: daystaken
         });
-  
+
         // Trigger next level approval
         const nextLevel = parseInt(workflow[0].level, 10) + 1;
         const nextApprover = await SELECT.from(PAN_WORKFLOW_HISTORY_APR).where({
           PAN_Number: req.data.data,
           level: nextLevel.toString()
         });
-  
+
         if (nextApprover) {
           await UPDATE(PAN_WORKFLOW_HISTORY_APR, {
             PAN_Number: req.data.data,
@@ -316,38 +360,66 @@ module.exports = cds.service.impl(async function () {
             Remarks: "pending for Approval",
             Begin_DateAND_Time: new Date()
           });
+          // }else{
+          // let tskid =  queryResult[0].task_id;
+          // $.ajax({
+          //   url: "https://35a254d6trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com/http/postcallscript",
+          //   method: "POST",
+          //   contentType: "application/json",
+          //   data: JSON.stringify({
+          //     "actionableType": "Task",
+          //     "uniqueName": tskid,
+          //     "actionName": "Approve",
+          //     "options": {
+          //       "comment": "Approved!"
+          //     }
+          //   }),
+          //   beforeSend: function(xhr) {
+          //     const username = "sb-81c5da0d-334a-41f4-a66a-62f5eaed6a7a!b451464|it-rt-35a254d6trial!b26655";
+          //     const password = "51c0d21f-3201-4b4b-8ce4-be49b5a0a4f1$9-eWniOpp2NxbHuY5tPq9tXpKqHBKa5m3tcgLM8VvnM=";
+          //     const base64 = btoa(username + ":" + password);
+          //     xhr.setRequestHeader("Authorization", "Basic " + base64);
+          //   },
+          //   success: function(response) {
+          //     console.log("Success:", response);
+          //   },
+          //   error: function(xhr, status, error) {
+          //     console.error("Error:", xhr.responseText || error);
+          //   }
+          // });
+
         }
-  
+
         // Optional: Notification_Status increment logic
-        const existingRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR)
-          .where({ PAN_Number: req.data.data });
-  
-        let newStatus = "1";
-        let shouldUpdate = false;
-  
-        if (existingRecord) {
-          const status = existingRecord.Notification_Status;
-          if (!status || status.trim() === "") {
-            shouldUpdate = true;
-          } else {
-            const currentStatus = parseInt(status, 10);
-            if (!isNaN(currentStatus)) {
-              newStatus = (currentStatus + 1).toString();
-              shouldUpdate = true;
-            }
-          }
-        }
-  
-        if (shouldUpdate) {
-          await UPDATE(PAN_WORKFLOW_HISTORY_APR)
-            .where({ PAN_Number: req.data.data })
-            .with({ Notification_Status: newStatus });
-        }
-  
+        // const existingRecord = await SELECT.one.from(PAN_WORKFLOW_HISTORY_APR)
+        //   .where({ PAN_Number: req.data.data });
+
+        // let newStatus = "1";
+        // let shouldUpdate = false;
+
+        // if (existingRecord) {
+        //   const status = existingRecord.Notification_Status;
+        //   if (!status || status.trim() === "") {
+        //     shouldUpdate = true;
+        //   } else {
+        //     const currentStatus = parseInt(status, 10);
+        //     if (!isNaN(currentStatus)) {
+        //       newStatus = (currentStatus + 1).toString();
+        //       shouldUpdate = true;
+        //     }
+        //   }
+        // }
+
+        // if (shouldUpdate) {
+        //   await UPDATE(PAN_WORKFLOW_HISTORY_APR)
+        //     .where({ PAN_Number: req.data.data })
+        //     .with({ Notification_Status: newStatus });
+        // }
+
       } else {
         return "No subprocess found to cancel";
       }
-  
+      await new Promise(resolve => setTimeout(resolve, 2500));
       // If process is fully complete
       const process_stop = await axios.request({
         url: `https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances/${workid}`,
@@ -357,30 +429,31 @@ module.exports = cds.service.impl(async function () {
           'Content-Type': 'application/json',
         },
       });
-  
+      // await new Promise(resolve => setTimeout(resolve, 1000));
+
       if (process_stop.data.status === "COMPLETED") {
         await UPDATE(PAN_Details_APR, {
           PAN_Number: req.data.data
         }).with({
           Sap_workitem_id: null,
-          status: `Approved by ${mail}`
+          status: `Approved`
         });
-  
-        await UPDATE(PAN_WORKFLOW_HISTORY_APR)
-          .where({ PAN_Number: req.data.data })
-          .with({ Notification_Status: null });
-  
+
+        // await UPDATE(PAN_WORKFLOW_HISTORY_APR)
+        //   .where({ PAN_Number: req.data.data })
+        //   .with({ Notification_Status: null });
+
         return "Process completed";
       }
-  
+
       return `Approved level ${workflow[0].level} and subprocess cancelled`;
-  
+
     } catch (error) {
       console.error('Error processing approval:', error);
       return "An error occurred during approval";
     }
   });
-  
+
 
 
   this.on('reject', async (req) => {
@@ -400,6 +473,34 @@ module.exports = cds.service.impl(async function () {
       const query = await SELECT.from(PAN_Details_APR).where({
         PAN_Number: req.data.data
       });
+
+      // let tskid =  query[0].task_id;
+      // $.ajax({
+      //   url: "https://35a254d6trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com/http/postcallscript",
+      //   method: "POST",
+      //   contentType: "application/json",
+      //   data: JSON.stringify({
+      //     "actionableType": "Task",
+      //     "uniqueName": tskid,
+      //     "actionName": "Reject",
+      //     "options": {
+      //       "comment": "Rejected!"
+      //     }
+      //   }),
+      //   beforeSend: function(xhr) {
+      //     const username = "sb-81c5da0d-334a-41f4-a66a-62f5eaed6a7a!b451464|it-rt-35a254d6trial!b26655";
+      //     const password = "51c0d21f-3201-4b4b-8ce4-be49b5a0a4f1$9-eWniOpp2NxbHuY5tPq9tXpKqHBKa5m3tcgLM8VvnM=";
+      //     const base64 = btoa(username + ":" + password);
+      //     xhr.setRequestHeader("Authorization", "Basic " + base64);
+      //   },
+      //   success: function(response) {
+      //     console.log("Success:", response);
+      //   },
+      //   error: function(xhr, status, error) {
+      //     console.error("Error:", xhr.responseText || error);
+      //   }
+      // });
+
 
       //time calculate
       const submittedDate = new Date(query[0].submitted_date); // from DB
@@ -458,6 +559,7 @@ module.exports = cds.service.impl(async function () {
         data: { status: 'CANCELED' },
       });
 
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       console.log(cancel_bpa);
 
@@ -467,11 +569,11 @@ module.exports = cds.service.impl(async function () {
       const updateResult = await UPDATE(PAN_WORKFLOW_HISTORY_APR)
         .where({
           PAN_Number: req.data.data,
-          Employee_Name: mail,
+          // Employee_Name: mail,
           level: existingRecord[0].level
         })
         .with({
-          Remarks: `Rejected by ${mail}`,
+          Remarks: `Rejected`,
           Approved_by: mail,
           Notification_Status: null,
           End_DateAND_Time: new Date(),
@@ -508,6 +610,7 @@ module.exports = cds.service.impl(async function () {
   })
 
   this.on('clarify', async (req) => {
+    debugger
     var pan_no = req.data.panno;
     const wf = await UPDATE(PAN_Details_APR)
       .where({ PAN_Number: req.data.panno })
@@ -516,5 +619,11 @@ module.exports = cds.service.impl(async function () {
       });
     return "updated as need for clarification"
   })
+
+  this.on("cbe", async (req) => {
+    let data = await SELECT.from(PAN_Details_APR).where`PAN_Number = ${req.data.ID}`;
+    // console.log(data);
+    return JSON.stringify(data[0]);
+});
 
 })

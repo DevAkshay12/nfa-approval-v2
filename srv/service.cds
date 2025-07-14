@@ -46,4 +46,5 @@ service PanApproval {
     function wf_data(panno : String, comment : String) returns String;
     function reject(data : String, email : String)     returns String;
     function clarify(panno : String)                   returns String;
+    function cbe(ID : String)                          returns String;
 }

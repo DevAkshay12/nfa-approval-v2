@@ -217,6 +217,16 @@
                       }
                     }
                   }
+                },
+                "header": {
+                  "actions": {
+                    "cbe": {
+                      "press": "approval.ext.controller.Cbenav.tocbe",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "CBE"
+                    }
+                  }
                 }
               },
               "navigation": {

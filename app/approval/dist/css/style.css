@@ -1,171 +1,30 @@
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory-innerTable,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FacetSubSection\:\:VendorResponseDetails-innerGrid,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails-innerTable,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FacetSubSection\:\:TermsandConditions-innerGrid,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails-innerTable
-{
-    background: linear-gradient(to bottom right, 	#b7d3ef, #6993db); /* soft Fiori Horizon background */
-  border: 1px solid #d0e2f2;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* vendor obj page2 */
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Proposed_Vendor_Code,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Order_Value_BKTIn_Project_CurrencyBKT,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_GST_Number,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Project_CurrencyORBase_Currency,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_CE_Date,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Destination_State_BKTShipDASHto_LocationBKT,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Technical_Committee_who_cleared_the_proposal,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_CE_Score,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Order_Value_BKTIn_Bid_CurrencyBKT,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Contact_PersonDASH2,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Final_Quotation_Date,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_References_to_be_displayed_in_Order,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Supplier_Origin_State,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Final_Quotation_Amount,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_PE_Score,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Order_CurrencyORBid_currency,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Vendor_Contact_PersonDASH1,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Commercial_Committee_who_cleared_the_proposal,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:FormContainer\:\:VendorResponse\:\:FormElement\:\:DataField\:\:Incoterms,
-/*  */
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:PAN_Number,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Order_CurrencyORBid_currency,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:RFP_Number,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:BUORPurchasing_Group,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Split_OrderORNo_of_vendors,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Final_proposed_Value,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:RFP_Publish_Date,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Plant_Code,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Order_Location_OR_Plant,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Savings_achieved_btw_initial_and_final_quote,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Time_Taken_for_FinalizationDASHIn_DAYS,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Project_Description,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Base_line_spend,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Savings_against_base_line_spend_of_RFP,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:status,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:PR_NumberBKTsBKT,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Project_CurrencyORBase_Currency,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Number_of_Vendors_Shortlisted_for_RFP,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:number_of_vendors_invited,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:FormContainer\:\:GeneralDetails1\:\:FormElement\:\:DataField\:\:Subject_of_ProposalOROrder
-{
-    background-color: #ffffff;
-    border: 1px solid #ccc;
+.sapUiFormCLElement{
+    background-color: #fefefe;
     border-radius: 10px;
-    padding: 4px 5px;
-    padding-top: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a1a1a;
-    display: inline-block;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    cursor: default; /* Optional: gives feedback that hover is allowed */
-    margin-right: 12px;  /* Horizontal gap between boxes */
-    margin-bottom: 12px;
-}
-#approval\:\:PAN_Details_APRList--fe\:\:table\:\:PAN_Details_APR\:\:LineItem\:\:C\:\:PAN_Number-innerColumn,
-#approval\:\:PAN_Details_APRList--fe\:\:table\:\:PAN_Details_APR\:\:LineItem\:\:C\:\:BUORPurchasing_Group-innerColumn,
-#approval\:\:PAN_Details_APRList--fe\:\:table\:\:PAN_Details_APR\:\:LineItem\:\:C\:\:Plant_Code-innerColumn,
-#approval\:\:PAN_Details_APRList--fe\:\:table\:\:PAN_Details_APR\:\:LineItem\:\:C\:\:status-innerColumn,
-/* last sec */
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:Item_Code-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:HSN_OR_SAC_Code-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:Item_Short_Description-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:UOM-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:ItemDetails\:\:C\:\:Quantity-innerColumn,
-/*  */
-/* payment terms det */
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:iddd-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Percentage-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Description-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Due_date-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Mandatory_Documents_OR_Submissions-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:To_be_certified_in_Company-innerColumn,
-#approval\:\:PAN_Details_APR_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PaymentTermDetails\:\:C\:\:Payment_methord-innerColumn,
-/*  */
-/* vendor reponse det */
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Awarded_Vendor-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Vendor_Name-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Original_quote-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Final_Quote-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Vendor_Location-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Order_amount_OR_Split_order_amount-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Discount_Amount-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Discount_percentage-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1tovendor_data\:\:LineItem\:\:VendorResponseDetails\:\:C\:\:Rank-innerColumn,
-/*  */
-/* event */
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:eventNo-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:date-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:numberOfVendorsParticipated-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:l1AmountObtained-innerColumn,
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:table\:\:tab1totab2\:\:LineItem\:\:EventHistory\:\:C\:\:number-innerColumn
-{
-    background: linear-gradient(to right, #eef0ff, #e2e6f8); /* lavender-indigo gradient */
-  color: #2e2a5c; /* deep indigo */
-  font-weight: 600;
-  font-family: "72", "Segoe UI", "Roboto", sans-serif;
-  font-size: 14px;
-  border-top: 1px solid black;
-  border-left: 1px solid black; /* muted indigo */
-  border-right: 1px solid black;
-  text-align: left;
-  text-transform: capitalize;
-  letter-spacing: 0.2px;
-  box-shadow: inset 0 -1px 0 black;
-  transition: all 0.3s ease-in-out;
-}
-
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:CustomSubSection\:\:Workflow--sampleTable {
-  background: linear-gradient(to right, #eef0ff, #e2e6f8); /* lavender-indigo gradient */
-  color: #2e2a5c; /* deep indigo */
-  font-weight: 600;
-  font-family: "72", "Segoe UI", "Roboto", sans-serif;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #cfd2e7;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-}
-
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:CustomSubSection\:\:Workflow--sampleTable th {
-  background: linear-gradient(to right, #eef0ff, #e2e6f8);
-  color: #2e2a5c;
-  font-weight: 600;
-  font-family: "72", "Segoe UI", "Roboto", sans-serif;
-  border-bottom: 1px solid #cfd2e7;
-  padding: 12px 16px;
-  text-align: left;
-  text-transform: capitalize;
-  letter-spacing: 0.2px;
-  transition: background 0.3s ease;
-}
-
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:CustomSubSection\:\:Workflow--sampleTable th:hover {
-  background: #d6daf8; /* subtle hover effect */
-}
-
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:CustomSubSection\:\:Workflow--sampleTable td {
-  padding: 10px 16px;
-  border-bottom: 1px solid #e3e6f2;
-  transition: background 0.2s ease;
-}
-
-#approval\:\:PAN_Details_APRObjectPage--fe\:\:CustomSubSection\:\:Workflow--sampleTable tr:last-child td {
-  border-bottom: none;
-}
-
-#approval\:\:PAN_Details_APRList--fe\:\:table\:\:PAN_Details_APR\:\:LineItem-toolbar
-{
-  background-color: #0a6ed1; /* SAP Fiori Horizon primary blue */
-  color: white; /* Optional: make text/icons readable */
-}
+    margin: 2%;
+    border: ridge royalblue;
+    box-shadow: 0 0 1px white, 0 0 1px white, 0 0 3px white;
+  }
+  .sapUiTable,.sapUiMdcTable.sapUiMdcTableFitContainer{
+    border-radius: 10px;
+    border: ridge royalblue;
+    box-shadow: 0 0 1px white, 0 0 1px white, 0 0 3px white;
+  }
+  .sapUxAPObjectPageSection,.sapFDynamicPageContent, .sapFDynamicPageContentFitContainer {
+    background-image: url('../images/anaskuu\ 17.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  .sapUxAPBlockContainer ,.sapUiTableExt .sapMTBHeader-CTX:first-child{
+    backdrop-filter: blur(4px) !important;
+    background: #0000004d !important;
+      padding-left: 5% !important;
+      padding-right: 5% !important;
+  }
+  .sapMTitle.sapMTitleNoWrap,.sapUiSizeCompact .sapUiFormContainerTitle>.sapUiFormTitle ,.sapUiSizeCompact .sapUxAPObjectPageSectionTitle {
+    color: white !important;
+  }
+  .sapUiFormCL.sapUiFormBackgrSolid, .sapUiFormCL.sapUiFormBackgrTranslucent,.sapUxAPObjectPageLayout .sapUiTableOnObjectPageAdjustmentsForSection .sapMIBar.sapMTB.sapMTBHeader-CTX {
+    background-color: inherit;
+  }

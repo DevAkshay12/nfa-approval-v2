@@ -57,6 +57,7 @@ entity PAN_Details {
                                                        on tab1totab3.tab3totab1 = $self;
       tab1tovendor_data                            : Composition of many PAN_vendor_data
                                                        on tab1tovendor_data.vendor_datatotab1 = $self;
+      tab1topdf : Association to many PAN_attachments on tab1topdf.PAN_Number =PAN_Number;                          
       tab1tocom                                    : Composition of many PAN_Comments
                                                        on tab1tocom.comtotab1 = $self;
 }
@@ -169,7 +170,7 @@ entity PAN_vendor_response {
       Destination_State_BKTShipDASHto_LocationBKT                                  : String;
       Vendor_GST_Number                                                            : String;
       Vendor_CE_Score                                                              : String;
-      Vendor_CE_Date                                                               : Date;
+      Vendor_CE_Date                                                               : String;
       Vendor_PE_Score                                                              : String;
       Vendor_PE_Date                                                               : Date;
       Vendor_Contact_PersonDASH1                                                   : String;

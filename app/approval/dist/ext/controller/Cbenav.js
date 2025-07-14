@@ -1,0 +1,2 @@
+sap.ui.define(["sap/m/MessageToast"],function(e){"use strict";return{tocbe:async function(e){var t=e.getModel();var a="cbe";let n=t.bindContext(`/${a}(...)`);var c=e.sPath.match(/'([^']+)'/)?.[1];n.setParameter("ID",c);debugger;await n.execute();let o=n.getBoundContext();let s=o.getObject();s=JSON.parse(s.value);console.log(s);var r=await sap.ushell.Container.getServiceAsync("Navigation");r.navigate({target:{semanticObject:"cbecompdbdynobj",action:"display"},params:{ProjectId:`${s.ProjectId}`}})}}});
+//# sourceMappingURL=Cbenav.js.map

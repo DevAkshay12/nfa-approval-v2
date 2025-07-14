@@ -1,2 +1,2 @@
-sap.ui.define(["sap/m/MessageToast"],function(s){"use strict";return{onPress:function(e){s.show("Custom handler invoked.")}}});
+sap.ui.define(["sap/m/MessageToast"],function(e){"use strict";return{getGroupHeader:function(e){debugger;return new sap.m.GroupHeaderListItem({title:"Level "+e.key})}}});
 //# sourceMappingURL=Workflow.js.map

@@ -4,8 +4,11 @@ sap.ui.define([
     'use strict';
 
     return {
-        onPress: function(oEvent) {
-            MessageToast.show("Custom handler invoked.");
+        getGroupHeader: function(oEvent) {
+            debugger
+            return new sap.m.GroupHeaderListItem({
+				title: 'Level '+oEvent.key
+			});
         }
     };
 });

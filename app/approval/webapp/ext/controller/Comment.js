@@ -51,7 +51,7 @@ new Promise((resolve, reject) => {
     if(filteredData.length != 0)
     {
     // Map the data into the desired structure
-    for (var a = 0; a < data.length; a++) {
+    for (var a = 0; a < filteredData.length; a++) {
         var entry = {
             createdAt: filteredData[a].createdAt,  // Map createdAt from data[a]
             comment: filteredData[a].Comments,      // Map comment from data[a]

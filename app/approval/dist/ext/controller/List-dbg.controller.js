@@ -34,13 +34,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				//             reject(err);  // Handle error if the AJAX request fails
 				//         });
 				// 	})
-				var name = sap.ushell.Container.getUser().getEmail();
+				// var name = sap.ushell.Container.getUser().getEmail();
 				var busy = new sap.m.BusyDialog({
 					title: "Please wait",
 					text: "Loading data...",
 				})
 				busy.open();
-				// var name = "rajendraakshay1@gmail.com";
+				var name = "rajendraakshay1@gmail.com";
 				// var name = "akshay.br@peolsolutions.com";
 				var cFunction = this.base.getModel().bindContext(`/${'getdata'}(...)`);
 				cFunction.setParameter("data", name);
@@ -50,19 +50,21 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				var FilterBar = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::FilterBar::PAN_Details_APR::FilterField::PAN_Number");
 				FilterBar.setVisible(false);
 				console.log(result1);
-				if (result1) {
-					var pan_number = result1.value[0].PAN_Number;
-					
-					console.log(FilterBar);
-
-					var oCondition = {
-						operator: "Contains", // Set the operator to "Contains"
-						values: [pan_number]  // Set the value to be filtered
-					};
-
-					FilterBar.setConditions([oCondition]);
-					sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::FilterBar::PAN_Details_APR-btnSearch").firePress()
+				if (result1 && result1.value && result1.value.length > 0) {
+					const panNumbers = result1.value.map(item => item.PAN_Number); // Collect PANs
+			  
+					FilterBar.setVisible(false); 
+			  
+					// Prepare OR filter conditions for multiple PANs
+					const panConditions = panNumbers.map(pan => ({
+					  operator: "EQ",
+					  values: [pan]
+					}))
+					FilterBar.setConditions(panConditions);
+					const searchBtn = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::FilterBar::PAN_Details_APR-btnSearch");
+					searchBtn.firePress();
 					busy.close();
+
 				}
 				else {
 					var Table = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::table::PAN_Details_APR::LineItem-innerTable");

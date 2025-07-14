@@ -10,14 +10,14 @@ sap.ui.define([
             debugger
             var textarea = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Textarea--textareafrag");
             if (textarea.getValue().length == 0) {
-                sap.m.MessageBox.error("Comments are mandatory.", {
+                sap.m.MessageBox.error("Comments are mandatory ❗", {
                     title: "Error",
                 });
                 return;
             }
             sap.m.MessageBox.confirm(
-                "Do you want to reject the request?", {
-                title: "Confirm Rejection",
+                "Do you want to reject the request ?", {
+                title: "Confirm Rejection ❌",
                 actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
                 emphasizedAction: sap.m.MessageBox.Action.YES,
                 onClose: async function (oAction) {
@@ -58,7 +58,7 @@ sap.ui.define([
                             console.log(wf_result);
 
                             var email = sap.ushell.Container.getUser().getEmail();
-                            // var email = "akshay.br@peolsolutions.com"
+                            // var email = "rajendraakshay1@gmail.com"
                             var rej_func = this._view.getModel().bindContext(`/${'reject'}(...)`);
                             rej_func.setParameter("data", val[1]);
                             rej_func.setParameter("email", email);

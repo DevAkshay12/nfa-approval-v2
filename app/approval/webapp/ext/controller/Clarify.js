@@ -5,6 +5,7 @@ sap.ui.define([
 
     return {
         clarify : async function(oEvent) {
+            debugger
             var textarea = sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::CustomSubSection::Textarea--textareafrag").getValue();
             if(textarea.length>0)
             {
