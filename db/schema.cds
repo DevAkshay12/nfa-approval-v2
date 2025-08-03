@@ -49,6 +49,36 @@ entity PAN_Details {
       Comments                                     : LargeString;
       submitted_by                                 : String;
       submitted_date                               : String;
+
+       //new fields 1st level//
+      NFAID                                           : String;
+      ApprovingPlant                                  : String;
+      Existing_PO_ARC_ContractValue                   : String;
+      Existing_PO_number                              : String;
+      Amendment_Value_Total_NFA_Amount                : String;
+      Budget                                          : String;
+      Rational_for_not_doing_auction                  : Boolean;
+      Is_any_new_initiative_bestpractices             : String;
+      Negotiation_Committee                           : String;
+      Is_there_Any_Import_Supply_under_this_Proposal  : Boolean;
+      Last_Purchase_Price_CLPP                        : String;
+      Saving_Increase_Amount_on_LPP                   : String;
+      Prices_Are                                      : String;
+      //new fields 1st level//
+
+      //new fields 2nd level//
+      Amendment_In_Existing_PO_ARC_Contract           : Boolean;
+      Pricing_in_Business_Plan_If_Applicable          : String;
+      Price_Justification                             : String;
+      Deviations_from_Group_philosophy_Cardinal_rules : String;
+      List_of_Deviation                               : String;
+      Penalty_clause_for_Quality                      : String;
+      Penalty_criteria                                : String;
+      Rationale_if_not_L1                             : String;
+      SBU_Unit_Location                               : String;
+      //new fields 2nd level //
+
+
       tab1toWORKFLOW_HISTORY                       : Composition of many PAN_WORKFLOW_HISTORY
                                                        on tab1toWORKFLOW_HISTORY.WORKFLOW_HISTORYtotab1 = $self;
       tab1totab2                                   : Composition of many PAN_WEB_EVENT
@@ -71,6 +101,13 @@ entity PAN_WEB_EVENT {
       date                        : String;
       numberOfVendorsParticipated : String;
       l1AmountObtained            : String;
+
+       //////////new fields/////////////
+      Comparison_of_offer         : String;
+      Auction_Done                : String;
+      Auction_Details             : String;
+      //////////new fields/////////////
+
       tab2totab1                  : Association to one PAN_Details
                                       on tab2totab1.PAN_Number = PAN_Number;
 }
@@ -150,6 +187,39 @@ entity PAN_vendor_data {
       Commercial_Terms                                                             : LargeString;
       Compliance_Terms                                                             : LargeString;
       Others                                                                       : LargeString;
+
+      ////////////////////////new fields///////////////////////////////
+      Contract_Period                                                              : String;
+      Order_Type_Parties_contacted_and_technically_accepted                        : String;
+      Contract_Manager_Name                                                        : String;
+      Is_Vendor_dependency                                                         : Boolean;
+      Vendors_Latest_Available_Turnover                                            : String;
+      Total_Vendor_Spend_for_Current_FY                                            : String;
+      Shortlisted_Parties_Credentials_Background                                   : String;
+      Internal_SLAs_KPIs_for_the_contract                                          : String;
+      Contract_Value_Basic_Value                                                   : String;
+      FTA_EPCG_any_other_benefit_availed_for_duty_saving                           : Boolean;
+      Approximate_Duty_Amount_in_INR                                               : String;
+      Monthly_Quantity                                                             : String;
+      Reason_for_Post_Facto_NFA_If_Applicable                                      : String;
+      Inco_term                                                                    : String;
+      Terms_Of_Payment_milestone_on_which_payment_will_be_made                     : String;
+      Packing_Forwarding                                                           : String;
+      Insurance                                                                    : String;
+      Delivery_Lead_Time                                                           : String;
+      Liquidated_Damages                                                           : String;
+      Liquidated_Damages_Clause                                                    : String;
+      PBG_and_SD                                                                   : String;
+      PBG_and_SD_Clause                                                            : String;
+      Job_Clearance_Certificates                                                   : String;
+      HR_Clearance_Certificates                                                    : String;
+      Penalty_clause_for_safety_Subcontract                                        : Boolean;
+      Other_Key_Terms                                                              : String;
+      Rational_for_awarding_contract_to_dependent_partner                          : String;
+      ////////////////////////new fields///////////////////////////////
+
+
+
       vendtovenr                                                                   : Composition of many PAN_vendor_response
                                                                                        on vendtovenr.venrtovend = $self;
       // vendtotnc :  Composition of many Terms_and_Conditions_Compared_with on vendtotnc.tnctovend = $self;
@@ -245,6 +315,16 @@ entity PAN_PRICE_DETAILS {
       Amount                           : String;
       Indian_Tax_PER                   : String;
       Quantity_Over_Delivery_Tolerance : String;
+
+        //////////////////////////new fields///////////////////////////////
+      Approval_Requested_For_Subject         : String;
+      Product_Service_Description_Background : String;
+      Comparison_of_offer                    : String;
+      Tax_Amount                             : String;
+      Freight                                : String;
+      Delivery_Lead_Time                     : String;
+      //////////////////////////new fields///////////////////////////////
+
       pdtovend                         : Association to PAN_vendor_data
                                            on  pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code
                                            and PAN_Number                    = pdtovend.PAN_Number;

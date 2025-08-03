@@ -229,6 +229,19 @@ annotate service.PAN_Details_APR with @(
                     Target : '@UI.FieldGroup#GeneralDetails',
                 },
                 {
+                    $Type : 'UI.CollectionFacet',
+                    Label : 'Header Details',
+                    ID : 'HeaderDetails',
+                    Facets : [
+                        {
+                            $Type : 'UI.ReferenceFacet',
+                            Label : 'Header Details',
+                            ID : 'HeaderDetails1',
+                            Target : '@UI.FieldGroup#HeaderDetails',
+                        },
+                    ],
+                },
+                {
                     $Type : 'UI.ReferenceFacet',
                     Label : 'Event History',
                     ID : 'EventHistory',
@@ -373,34 +386,94 @@ annotate service.PAN_Details_APR with @(
     UI.SelectionFields : [
         PAN_Number,
     ],
+    UI.FieldGroup #HeaderDetails : {
+        $Type : 'UI.FieldGroupType',
+         Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: Amendment_Value_Total_NFA_Amount,
+                Label: 'Amendment Value Total NFA Amount',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Budget,
+                Label: 'Budget',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Rational_for_not_doing_auction,
+                Label: 'Rational For Not Doing Auction',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Is_any_new_initiative_bestpractices,
+                Label: 'Is any New Initiative Bestpractices',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Negotiation_Committee,
+                Label: 'Negotiation Committee',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Is_there_Any_Import_Supply_under_this_Proposal,
+                Label: 'Is There Any Import Supply Under This Proposal',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Last_Purchase_Price_CLPP,
+                Label: 'Last Purchase Price CLPP',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Saving_Increase_Amount_on_LPP,
+                Label: 'Saving Increase Amount on LPP',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Prices_Are,
+                Label: 'Prices Are',
+            },
+        ],
+    },
 );
 
 annotate service.PAN_WEB_EVENT_APR with @(
     UI.LineItem #EventHistory : [
         {
-            $Type : 'UI.DataField',
-            Value : eventNo,
-            Label : 'eventNo',
+            $Type: 'UI.DataField',
+            Value: eventNo,
+            Label: 'Event No',
         },
         {
-            $Type : 'UI.DataField',
-            Value : number,
-            Label : 'number',
+            $Type: 'UI.DataField',
+            Value: number,
+            Label: 'Number',
         },
         {
-            $Type : 'UI.DataField',
-            Value : date,
-            Label : 'date',
+            $Type: 'UI.DataField',
+            Value: date,
+            Label: 'Date',
         },
         {
-            $Type : 'UI.DataField',
-            Value : numberOfVendorsParticipated,
-            Label : 'numberOfVendorsParticipated',
+            $Type: 'UI.DataField',
+            Value: numberOfVendorsParticipated,
+            Label: 'Number Of Vendors Participated',
         },
         {
-            $Type : 'UI.DataField',
-            Value : l1AmountObtained,
-            Label : 'l1AmountObtained',
+            $Type: 'UI.DataField',
+            Value: l1AmountObtained,
+            Label: 'L1 Amount Obtained',
+        },
+        {
+            $Type: 'UI.DataField',
+            Value: Auction_Done,
+            Label: 'Auction Done',
+        },
+        {
+            $Type: 'UI.DataField',
+            Value: Auction_Details,
+            Label: 'Auction Details',
         },
     ]
 );
@@ -478,104 +551,135 @@ annotate service.PAN_vendor_data_APR with @(
             ID : 'ItemDetails',
             Target : 'vendtopd/@UI.LineItem#ItemDetails',
         },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'item level info',
+            ID : 'itemlevelinfo',
+            Target : '@UI.FieldGroup#itemlevelinfo',
+        },
     ],
     UI.FieldGroup #VendorResponse : {
         $Type : 'UI.FieldGroupType',
-        Data : [
+           Data : [
             {
-                $Type : 'UI.DataField',
-                Value : Proposed_Vendor_Code,
-                Label : 'Proposed_Vendor_Code',
+                $Type: 'UI.DataField',
+                Value: Contract_Period,
+                Label: 'Contract Period',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_CE_Date,
-                Label : 'Vendor_CE_Date',
+                $Type: 'UI.DataField',
+                Value: Order_Type_Parties_contacted_and_technically_accepted,
+                Label: 'Order Type Parties Contacted And Technically Accepted ( Rational If On Single Vendor Basis)',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Order_Value_BKTIn_Bid_CurrencyBKT,
-                Label : 'Order_Value_BKTIn_Bid_CurrencyBKT',
+                $Type: 'UI.DataField',
+                Value: Contract_Manager_Name,
+                Label: 'Contract Manager Name (Incase Of Services): Group Price Benchmarking( Applicable For Supply) Kindly Provide Details In Standard Format',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Supplier_Origin_State,
-                Label : 'Supplier_Origin_State',
+                $Type: 'UI.DataField',
+                Value: Is_Vendor_dependency,
+                Label: ' Is Vendor dependency > 50%',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_Contact_PersonDASH1,
-                Label : 'Vendor_Contact_PersonDASH1',
+                $Type: 'UI.DataField',
+                Value: Vendors_Latest_Available_Turnover,
+                Label: 'Vendors Latest Available Turnover ( In INR Cr.) ₹',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Order_Value_BKTIn_Project_CurrencyBKT,
-                Label : 'Order_Value_BKTIn_Project_CurrencyBKT',
+                $Type: 'UI.DataField',
+                Value: Total_Vendor_Spend_for_Current_FY,
+                Label: 'Total Vendor Spend For Current FY (In INR Cr.) (Total Open Value As On NFA Date + Proposed Annual Value)₹',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Destination_State_BKTShipDASHto_LocationBKT,
-                Label : 'Destination_State_BKTShipDASHto_LocationBKT',
+                $Type: 'UI.DataField',
+                Value: Shortlisted_Parties_Credentials_Background,
+                Label: 'Shortlisted Parties Credentials/Background',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_Contact_PersonDASH2,
-                Label : 'Vendor_Contact_PersonDASH2',
+                $Type: 'UI.DataField',
+                Value: Internal_SLAs_KPIs_for_the_contract,
+                Label: 'Internal SLAs/KPIs For The Contract:',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_Final_Quotation_Amount,
-                Label : 'Vendor_Final_Quotation_Amount',
+                $Type: 'UI.DataField',
+                Value: Contract_Value_Basic_Value,
+                Label: 'Contract Value (Basic Value)',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_GST_Number,
-                Label : 'Vendor_GST_Number',
+                $Type: 'UI.DataField',
+                Value: FTA_EPCG_any_other_benefit_availed_for_duty_saving,
+                Label: 'FTA/EPCG/ Any Other Benefit Availed For Duty Saving',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Technical_Committee_who_cleared_the_proposal,
-                Label : 'Technical_Committee_who_cleared_the_proposal',
+                $Type: 'UI.DataField',
+                Value: Approximate_Duty_Amount_in_INR,
+                Label: 'Approximate Duty Amount In INR ₹',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_Final_Quotation_Date,
-                Label : 'Vendor_Final_Quotation_Date',
+                $Type: 'UI.DataField',
+                Value: Monthly_Quantity,
+                Label: 'Monthly Quantity',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_PE_Score,
-                Label : 'Vendor_PE_Score',
+                $Type: 'UI.DataField',
+                Value: Reason_for_Post_Facto_NFA_If_Applicable,
+                Label: 'Reason For Post Facto NFA ( If Applicable)',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Commercial_Committee_who_cleared_the_proposal,
-                Label : 'Commercial_Committee_who_cleared_the_proposal',
+                $Type: 'UI.DataField',
+                Value: Inco_term,
+                Label: 'Inco Term',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Project_CurrencyORBase_Currency,
-                Label : 'Project_CurrencyORBase_Currency',
+                $Type: 'UI.DataField',
+                Value: Terms_Of_Payment_milestone_on_which_payment_will_be_made,
+                Label: 'Terms Of Payment & Milestone On Which Payment Will Be Made:',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_CE_Score,
-                Label : 'Vendor_CE_Score',
+                $Type: 'UI.DataField',
+                Value: Packing_Forwarding,
+                Label: 'Packing & Forwarding',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Vendor_References_to_be_displayed_in_Order,
-                Label : 'Vendor_References_to_be_displayed_in_Order',
+                $Type: 'UI.DataField',
+                Value: Insurance,
+                Label: 'Insurance',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Order_CurrencyORBid_currency,
-                Label : 'Order_CurrencyORBid_currency',
+                $Type: 'UI.DataField',
+                Value: Liquidated_Damages,
+                Label: 'Liquidated Damages',
             },
             {
-                $Type : 'UI.DataField',
-                Value : Incoterms,
-                Label : 'Incoterms',
+                $Type: 'UI.DataField',
+                Value: Liquidated_Damages_Clause,
+                Label: 'Liquidated Damages Clause',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: PBG_and_SD,
+                Label: 'PBG and SD',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: PBG_and_SD_Clause,
+                Label: 'PBG and SD Clause',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Job_Clearance_Certificates,
+                Label: 'Job Clearance Certificates',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: HR_Clearance_Certificates,
+                Label: 'HR Clearance Certificates',
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: Other_Key_Terms,
+                Label: 'Other Key Terms (Eg: Warranty, Inspection Clause, GTC Deviation, Party Delivery. Etc)',
             },
         ],
     },
@@ -583,24 +687,44 @@ annotate service.PAN_vendor_data_APR with @(
         $Type : 'UI.FieldGroupType',
         Data : [
             {
+                $Type: 'UI.DataField',
+                Value: Rational_for_awarding_contract_to_dependent_partner,
+                Label: 'Rational For Awarding Contract To Dependent Partner',
+            }
+        ],
+    },
+    UI.FieldGroup #itemlevelinfo : {
+        $Type : 'UI.FieldGroupType',
+       Data : [
+            {
                 $Type : 'UI.DataField',
-                Value : Scope_and_Responsibilities,
-                Label : 'Scope_and_Responsibilities',
+                Value : vendtopd.Product_Service_Description_Background,
+                Label : 'Product Service Description Background',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Compliance_Terms,
-                Label : 'Compliance_Terms',
+                Value : vendtopd.Approval_Requested_For_Subject,
+                Label : 'Approval Requested For Subject',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Commercial_Terms,
-                Label : 'Commercial_Terms',
+                Value : vendtopd.Comparison_of_offer,
+                Label : 'Comparison of offer',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Others,
-                Label : 'Others',
+                Value : vendtopd.Tax_Amount,
+                Label : 'Tax Amount',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : vendtopd.Freight,
+                Label : 'Freight',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : Delivery_Lead_Time,
+                Label : 'Delivery Lead Time',
             },
         ],
     },
@@ -609,46 +733,46 @@ annotate service.PAN_vendor_data_APR with @(
 annotate service.PAN_PAYMENT_TERM_DETAILS_APR with @(
     UI.LineItem #PaymentTermDetails : [
         {
-            $Type : 'UI.DataField',
-            Value : iddd,
-            Label : 'iddd',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : Percentage,
-            Label : 'Percentage',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : Description,
-            Label : 'Description',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : Due_date,
-            Label : 'Due_date',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : Mandatory_Documents_OR_Submissions,
-            Label : 'Mandatory_Documents_OR_Submissions',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : To_be_certified_in_Company,
-            Label : 'To_be_certified_in_Company',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : Payment_methord,
-            Label : 'Payment_methord',
-        },
+        $Type: 'UI.DataField',
+        Value: slNo,
+        Label: 'SlNo',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: Payment_methord,
+        Label: 'Payment Method',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: Percentage,
+        Label: 'Percentage',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: Description,
+        Label: 'Description',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: Due_date,
+        Label: 'Due Date',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: Mandatory_Documents_OR_Submissions,
+        Label: 'Mandatory Documents OR Submissions',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: To_be_certified_in_Company,
+        Label: 'To Be Certified In Company',
+    },
     ]
 );
 
 annotate service.PAN_PRICE_DETAILS_APR with @(
     UI.LineItem #ItemDetails : [
-        {
+          {
             $Type : 'UI.DataField',
             Value : Item_Code,
             Label : 'Item_Code',
@@ -672,6 +796,21 @@ annotate service.PAN_PRICE_DETAILS_APR with @(
             $Type : 'UI.DataField',
             Value : Quantity,
             Label : 'Quantity',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Unit_Price,
+            Label : 'Unit_Price',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Amount,
+            Label : 'Amount',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : Indian_Tax_PER,
+            Label : 'Indian_Tax_PER',
         },
     ]
 );
