@@ -25,6 +25,12 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
 				var oModel = this.base.getExtensionAPI().getModel();
 			},
+			onAfterRendering:function (oEvent) {
+                debugger
+                // sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::FormContainer::HeaderDetails1").setExpandable(true);
+                // sap.ui.getCore().byId("approval::PAN_Details_APRObjectPage--fe::FormContainer::HeaderDetails1").setExpanded(false);
+				//  sap.ui.getCore().byId("approval::PAN_Details_APR_tab1tovendor_dataObjectPage--fe::FacetSection::PaymentTermDetails").setVisible(false)
+            },
 			editFlow: {
 				onAfterSave: async function (oEvent) {
 					debugger

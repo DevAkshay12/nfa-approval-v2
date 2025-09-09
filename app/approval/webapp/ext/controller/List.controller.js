@@ -39,68 +39,68 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 
 				////////////code/////////
 				
-				// var busy = new sap.m.BusyDialog({
-				// 	title: "Please wait",
-				// 	text: "Loading data...",
-				// })
-				// busy.open();
+				var busy = new sap.m.BusyDialog({
+					title: "Please wait",
+					text: "Loading data...",
+				})
+				busy.open();
 				// var name = "rajendraakshay1@gmail.com";
-				// // var name = "akshay.br@peolsolutions.com";
-				// var cFunction = this.base.getModel().bindContext(`/${'getdata'}(...)`);
-				// cFunction.setParameter("data", name);
-				// await cFunction.execute();
-				// let oContext1 = cFunction.getBoundContext();
-				// let result1 = oContext1.getObject();
-				// var FilterBar = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::FilterBar::PAN_Details_APR::FilterField::PAN_Number");
-				// FilterBar.setVisible(false);
-				// console.log(result1);
-				// if (result1 && result1.value && result1.value.length > 0) {
-				// 	const panNumbers = result1.value.map(item => item.PAN_Number); // Collect PANs
+				var name = "akshay.br@peolsolutions.com";
+				var cFunction = this.base.getModel().bindContext(`/${'getdata'}(...)`);
+				cFunction.setParameter("data", name);
+				await cFunction.execute();
+				let oContext1 = cFunction.getBoundContext();
+				let result1 = oContext1.getObject();
+				var FilterBar = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::FilterBar::PAN_Details_APR::FilterField::PAN_Number");
+				FilterBar.setVisible(false);
+				console.log(result1);
+				if (result1 && result1.value && result1.value.length > 0) {
+					const panNumbers = result1.value.map(item => item.PAN_Number); // Collect PANs
 			  
-				// 	FilterBar.setVisible(false); 
+					FilterBar.setVisible(false); 
 			  
-				// 	// Prepare OR filter conditions for multiple PANs
-				// 	const panConditions = panNumbers.map(pan => ({
-				// 	  operator: "EQ",
-				// 	  values: [pan]
-				// 	}))
-				// 	FilterBar.setConditions(panConditions);
-				// 	const searchBtn = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::FilterBar::PAN_Details_APR-btnSearch");
-				// 	searchBtn.firePress();
-				// 	busy.close();
+					// Prepare OR filter conditions for multiple PANs
+					const panConditions = panNumbers.map(pan => ({
+					  operator: "EQ",
+					  values: [pan]
+					}))
+					FilterBar.setConditions(panConditions);
+					const searchBtn = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::FilterBar::PAN_Details_APR-btnSearch");
+					searchBtn.firePress();
+					busy.close();
 
-				// }
-				// else {
-				// 	var Table = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::table::PAN_Details_APR::LineItem-innerTable");
-				// 	var oEmptyModel = new sap.ui.model.json.JSONModel([]);
-				// 	Table.setModel(oEmptyModel);
-				// 	Table.bindAggregation("rows", "/");
+				}
+				else {
+					var Table = sap.ui.getCore().byId("approval::PAN_Details_APRList--fe::table::PAN_Details_APR::LineItem-innerTable");
+					var oEmptyModel = new sap.ui.model.json.JSONModel([]);
+					Table.setModel(oEmptyModel);
+					Table.bindAggregation("rows", "/");
 				
-				// 	// Close the BusyDialog after 6 seconds
-				// 	setTimeout(function () {
-				// 		busy.close();
+					// Close the BusyDialog after 6 seconds
+					setTimeout(function () {
+						busy.close();
 				
-				// 		// Show the MessageDialog after the BusyDialog is closed
-				// 		var oMessageDialog = new sap.m.Dialog({
-				// 			title: "Information",
-				// 			type: "Message",
-				// 			state: "Information", // Indicates that it's an informational message
-				// 			content: new sap.m.Text({ text: "There is no request associated with this Email." }),
-				// 			beginButton: new sap.m.Button({
-				// 				text: "OK",
-				// 				press: function () {
-				// 					oMessageDialog.close(); // Close the dialog on button press
-				// 				}
-				// 			}),
-				// 			afterClose: function () {
-				// 				oMessageDialog.destroy(); // Clean up the dialog after closing
-				// 			}
-				// 		});
+						// Show the MessageDialog after the BusyDialog is closed
+						var oMessageDialog = new sap.m.Dialog({
+							title: "Information",
+							type: "Message",
+							state: "Information", // Indicates that it's an informational message
+							content: new sap.m.Text({ text: "There is no request associated with this Email." }),
+							beginButton: new sap.m.Button({
+								text: "OK",
+								press: function () {
+									oMessageDialog.close(); // Close the dialog on button press
+								}
+							}),
+							afterClose: function () {
+								oMessageDialog.destroy(); // Clean up the dialog after closing
+							}
+						});
 				
-				// 		// Open the dialog
-				// 		oMessageDialog.open();
-				// 	}, 6000); // 6 seconds delay
-				// }
+						// Open the dialog
+						oMessageDialog.open();
+					}, 6000); // 6 seconds delay
+				}
 				
 				
 

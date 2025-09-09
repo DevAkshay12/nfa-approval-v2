@@ -7,50 +7,50 @@ using {
 
 @cds.persistance.exists
 entity PAN_Details {
-  key PAN_Number                                   : String default 'def';
-      SBG                                          : String;
-      SBU                                          : String;
-      BUORPurchasing_Group                         : String;
-      Plant_Code                                   : String;
-      Project_Description                          : String;
-      PR_NumberBKTsBKT                             : String;
-      Subject_of_ProposalOROrder                   : String;
-      Previous_PAN_References                      : String;
-      Split_OrderORNo_of_vendors                   : String;
-      SOP_Type                                     : String;
-      Order_Type_OR_Document_tyFuuidpe             : String;
-      Asset_Type                                   : String;
-      Nature_of_Transaction                        : String;
-      Order_Location_OR_Plant                      : String;
-      Base_line_spend                              : String;
-      Project_CurrencyORBase_Currency              : String;
-      Order_CurrencyORBid_currency                 : String;
-      Final_proposed_Value                         : String;
-      Savings_achieved_btw_initial_and_final_quote : String;
-      Savings_against_base_line_spend_of_RFP       : String;
-      Number_of_Vendors_Shortlisted_for_RFP        : String;
-      Number_of_Vendors_Technically_Qualified      : String;
-      Required_at_Site_Date                        : String;
-      RFP_Number                                   : String;
-      RFP_Publish_Date                             : String;
-      Time_Taken_for_FinalizationDASHIn_DAYS       : String;
-      status                                       : String;
-      statusInd                                    : Integer; //used for criticality rep
-      created_by                                   : String;
-      task_id                                      : String;
-      type                                         : String;
-      status_a                                     : String;
-      switch_control                               : Boolean default false;
-      ProjectId                                    : String;
-      number_of_vendors_invited                    : String;
-      total_levels_of_approval                     : String(2);
-      Current_level_of_approval                    : String(2);
-      Sap_workitem_id                              : String;
-      Comments                                     : LargeString;
-      submitted_by                                 : String;
-      submitted_date                               : String;
+  key PAN_Number                                      : String default 'def';
+      SBG                                             : String;
+      SBU                                             : String;
+      BUORPurchasing_Group                            : String;
+      Plant_Code                                      : String;
+      Project_Description                             : String;
+      PR_NumberBKTsBKT                                : String;
+      Subject_of_ProposalOROrder                      : String;
+      Previous_PAN_References                         : String;
+      Split_OrderORNo_of_vendors                      : String;
+      SOP_Type                                        : String;
+      Order_Type_OR_Document_tyFuuidpe                : String;
+      Asset_Type                                      : String;
+      Nature_of_Transaction                           : String;
+      Order_Location_OR_Plant                         : String;
+      Base_line_spend                                 : String;
+      Project_CurrencyORBase_Currency                 : String;
+      Order_CurrencyORBid_currency                    : String;
+      Final_proposed_Value                            : String;
+      Savings_achieved_btw_initial_and_final_quote    : String;
+      Savings_against_base_line_spend_of_RFP          : String;
+      Number_of_Vendors_Shortlisted_for_RFP           : String;
+      Number_of_Vendors_Technically_Qualified         : String;
+      Required_at_Site_Date                           : String;
+      RFP_Number                                      : String;
+      RFP_Publish_Date                                : String;
+      Time_Taken_for_FinalizationDASHIn_DAYS          : String;
+      status                                          : String;
+      statusInd                                       : Integer; //used for criticality rep
+      created_by                                      : String;
+      task_id                                         : String;
+      type                                            : String;
+      status_a                                        : String;
+      switch_control                                  : Boolean default false;
+      ProjectId                                       : String;
+      number_of_vendors_invited                       : String;
+      total_levels_of_approval                        : String(2);
+      Current_level_of_approval                       : String(2);
+      Sap_workitem_id                                 : String;
+      Comments                                        : LargeString;
+      submitted_by                                    : String;
+      submitted_date                                  : String;
 
-       //new fields 1st level//
+      //new fields 1st level//
       NFAID                                           : String;
       ApprovingPlant                                  : String;
       Existing_PO_ARC_ContractValue                   : String;
@@ -79,17 +79,18 @@ entity PAN_Details {
       //new fields 2nd level //
 
 
-      tab1toWORKFLOW_HISTORY                       : Composition of many PAN_WORKFLOW_HISTORY
-                                                       on tab1toWORKFLOW_HISTORY.WORKFLOW_HISTORYtotab1 = $self;
-      tab1totab2                                   : Composition of many PAN_WEB_EVENT
-                                                       on tab1totab2.tab2totab1 = $self;
-      tab1totab3                                   : Composition of many PAN_TYPE
-                                                       on tab1totab3.tab3totab1 = $self;
-      tab1tovendor_data                            : Composition of many PAN_vendor_data
-                                                       on tab1tovendor_data.vendor_datatotab1 = $self;
-      tab1topdf : Association to many PAN_attachments on tab1topdf.PAN_Number =PAN_Number;                          
-      tab1tocom                                    : Composition of many PAN_Comments
-                                                       on tab1tocom.comtotab1 = $self;
+      tab1toWORKFLOW_HISTORY                          : Composition of many PAN_WORKFLOW_HISTORY
+                                                          on tab1toWORKFLOW_HISTORY.WORKFLOW_HISTORYtotab1 = $self;
+      tab1totab2                                      : Composition of many PAN_WEB_EVENT
+                                                          on tab1totab2.tab2totab1 = $self;
+      tab1totab3                                      : Composition of many PAN_TYPE
+                                                          on tab1totab3.tab3totab1 = $self;
+      tab1tovendor_data                               : Composition of many PAN_vendor_data
+                                                          on tab1tovendor_data.vendor_datatotab1 = $self;
+      tab1topdf                                       : Association to many PAN_attachments
+                                                          on tab1topdf.PAN_Number = PAN_Number;
+      tab1tocom                                       : Composition of many PAN_Comments
+                                                          on tab1tocom.comtotab1 = $self;
 }
 
 @cds.persistance.exists
@@ -102,7 +103,7 @@ entity PAN_WEB_EVENT {
       numberOfVendorsParticipated : String;
       l1AmountObtained            : String;
 
-       //////////new fields/////////////
+      //////////new fields/////////////
       Comparison_of_offer         : String;
       Auction_Done                : String;
       Auction_Details             : String;
@@ -188,6 +189,7 @@ entity PAN_vendor_data {
       Compliance_Terms                                                             : LargeString;
       Others                                                                       : LargeString;
 
+
       ////////////////////////new fields///////////////////////////////
       Contract_Period                                                              : String;
       Order_Type_Parties_contacted_and_technically_accepted                        : String;
@@ -219,7 +221,6 @@ entity PAN_vendor_data {
       ////////////////////////new fields///////////////////////////////
 
 
-
       vendtovenr                                                                   : Composition of many PAN_vendor_response
                                                                                        on vendtovenr.venrtovend = $self;
       // vendtotnc :  Composition of many Terms_and_Conditions_Compared_with on vendtotnc.tnctovend = $self;
@@ -240,7 +241,7 @@ entity PAN_vendor_response {
       Destination_State_BKTShipDASHto_LocationBKT                                  : String;
       Vendor_GST_Number                                                            : String;
       Vendor_CE_Score                                                              : String;
-      Vendor_CE_Date                                                               : String;
+      Vendor_CE_Date                                                               : Date;
       Vendor_PE_Score                                                              : String;
       Vendor_PE_Date                                                               : Date;
       Vendor_Contact_PersonDASH1                                                   : String;
@@ -302,21 +303,21 @@ entity PAN_PAYMENT_TERM_DETAILS {
 
 @cds.persistance.exists
 entity PAN_PRICE_DETAILS {
-  key pdkey                            : UUID;
-      Proposed_Vendor_Code             : String;
-      PAN_Number                       : String;
-      Item_Code                        : String;
-      HSN_OR_SAC_Code                  : String;
-      extendedPrice                    : String;
-      Item_Short_Description           : String;
-      UOM                              : String;
-      Quantity                         : String;
-      Unit_Price                       : String;
-      Amount                           : String;
-      Indian_Tax_PER                   : String;
-      Quantity_Over_Delivery_Tolerance : String;
+  key pdkey                                  : UUID;
+      Proposed_Vendor_Code                   : String;
+      PAN_Number                             : String;
+      Item_Code                              : String;
+      HSN_OR_SAC_Code                        : String;
+      extendedPrice                          : String;
+      Item_Short_Description                 : String;
+      UOM                                    : String;
+      Quantity                               : String;
+      Unit_Price                             : String;
+      Amount                                 : String;
+      Indian_Tax_PER                         : String;
+      Quantity_Over_Delivery_Tolerance       : String;
 
-        //////////////////////////new fields///////////////////////////////
+      //////////////////////////new fields///////////////////////////////
       Approval_Requested_For_Subject         : String;
       Product_Service_Description_Background : String;
       Comparison_of_offer                    : String;
@@ -325,9 +326,9 @@ entity PAN_PRICE_DETAILS {
       Delivery_Lead_Time                     : String;
       //////////////////////////new fields///////////////////////////////
 
-      pdtovend                         : Association to PAN_vendor_data
-                                           on  pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code
-                                           and PAN_Number                    = pdtovend.PAN_Number;
+      pdtovend                               : Association to PAN_vendor_data
+                                                 on  pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code
+                                                 and PAN_Number                    = pdtovend.PAN_Number;
 }
 
 @cds.persistance.exists

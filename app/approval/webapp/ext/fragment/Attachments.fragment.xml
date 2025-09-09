@@ -27,14 +27,12 @@
 						id="ddd"
 							fileName="{fileName}"
 							mediaType="{mediaType}"
-							     url="{
-         parts: ['PAN_Number', 'ID'],
-        formatter: 'handler.getContentStreamUrl'
-    }"
-							thumbnailUrl="{
-								path: 'mediaType',
-								formatter: 'handler.formatThumbnailUrl'
-							}"
+							  url="{= '/odata/v4/catalog/' + ${url} }"
+                            thumbnailUrl="{
+                                path: 'mediaType',
+                                formatter: 'handler.formatThumbnailUrl'
+                            }"
+                            openPressed="handler.onOpenPressed"
 							enabledEdit="false"
 							removePressed="handler.onRemovePressed"
 							enabledRemove="false"

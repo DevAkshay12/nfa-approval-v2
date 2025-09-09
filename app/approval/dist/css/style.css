@@ -1,30 +1,37 @@
-.sapUiFormCLElement{
-    background-color: #fefefe;
-    border-radius: 10px;
-    margin: 2%;
-    border: ridge royalblue;
-    box-shadow: 0 0 1px white, 0 0 1px white, 0 0 3px white;
-  }
-  .sapUiTable,.sapUiMdcTable.sapUiMdcTableFitContainer{
-    border-radius: 10px;
-    border: ridge royalblue;
-    box-shadow: 0 0 1px white, 0 0 1px white, 0 0 3px white;
-  }
-  .sapUxAPObjectPageSection,.sapFDynamicPageContent, .sapFDynamicPageContentFitContainer {
-    background-image: url('../images/anaskuu\ 17.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-  .sapUxAPBlockContainer ,.sapUiTableExt .sapMTBHeader-CTX:first-child{
-    backdrop-filter: blur(4px) !important;
-    background: #0000004d !important;
-      padding-left: 5% !important;
-      padding-right: 5% !important;
-  }
-  .sapMTitle.sapMTitleNoWrap,.sapUiSizeCompact .sapUiFormContainerTitle>.sapUiFormTitle ,.sapUiSizeCompact .sapUxAPObjectPageSectionTitle {
-    color: white !important;
-  }
-  .sapUiFormCL.sapUiFormBackgrSolid, .sapUiFormCL.sapUiFormBackgrTranslucent,.sapUxAPObjectPageLayout .sapUiTableOnObjectPageAdjustmentsForSection .sapMIBar.sapMTB.sapMTBHeader-CTX {
-    background-color: inherit;
-  }
+/* .sapUiFormCLElement{
+  background-color: #fefefe !important;
+  border-radius: 10px !important;
+  margin: 2% !important;
+  border: ridge royalblue !important;
+  box-shadow: 0 0 1px white, 0 0 1px white, 0 0 3px white !important;
+} */
+/* .sapUiSizeCompact .sapUxAPObjectPageSubSectionHeaderTitle{
+  color: white !important;
+} */
+.sapUiFormContainerTitle>.sapUiFormTitle.sapUiFormTitleExpandable>button{
+  border-bottom: outset !important;
+}
+/* .sapUiTable,.sapUiMdcTable.sapUiMdcTableFitContainer{
+  border-radius: 10px !important;
+  border: ridge royalblue !important;
+} */
+
+/* .sapUxAPBlockContainer ,.sapUiTableExt .sapMTBHeader-CTX:first-child{
+  backdrop-filter: blur(4px) !important;
+  background: #0000004d !important;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+} */
+/* .sapMTitle.sapMTitleNoWrap,.sapUiSizeCompact .sapUiFormContainerTitle>.sapUiFormTitle ,.sapUiSizeCompact .sapUxAPObjectPageSectionTitle {
+  color: white !important;
+} */
+.sapMVarMngmt .sapMTitle.sapMVarMngmtTitle{
+  color: #0064d9 !important;
+}
+.sapUiFormCL.sapUiFormBackgrSolid, .sapUiFormCL.sapUiFormBackgrTranslucent,.sapUxAPObjectPageLayout .sapUiTableOnObjectPageAdjustmentsForSection .sapMIBar.sapMTB.sapMTBHeader-CTX {
+  background-color: inherit !important;
+}
+
+.edit {
+  visibility: hidden !important;
+}

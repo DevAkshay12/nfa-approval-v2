@@ -283,103 +283,63 @@ annotate service.PAN_Details_APR with @(
         Data : [
             {
                 $Type : 'UI.DataField',
-                Value : PAN_Number,
-                Label : 'PAN_Number',
+                Value : SBU_Unit_Location,
+                Label : 'SBU Unit Location',
             },
             {
                 $Type : 'UI.DataField',
-                Value : BUORPurchasing_Group,
-                Label : 'BUORPurchasing_Group',
+                Value : Amendment_In_Existing_PO_ARC_Contract,
+                Label : 'Amendment In Existing PO ARC Contract',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Plant_Code,
-                Label : 'Plant_Code',
+                Value : Pricing_in_Business_Plan_If_Applicable,
+                Label : 'Pricing In Business Plan If Applicable',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Project_Description,
-                Label : 'Project_Description',
+                Value : Price_Justification,
+                Label : 'Price Justification',
             },
             {
                 $Type : 'UI.DataField',
-                Value : PR_NumberBKTsBKT,
-                Label : 'PR_NumberBKTsBKT',
+                Value : Deviations_from_Group_philosophy_Cardinal_rules,
+                Label : 'Deviations From Group Philosophy Cardinal Rules',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Subject_of_ProposalOROrder,
-                Label : 'Subject_of_ProposalOROrder',
+                Value : List_of_Deviation,
+                Label : 'List Of Deviation',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Split_OrderORNo_of_vendors,
-                Label : 'Split_OrderORNo_of_vendors',
+                Value : Penalty_clause_for_Quality,
+                Label : 'Penalty Clause For Quality',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Order_Location_OR_Plant,
-                Label : 'Order_Location_OR_Plant',
+                Value : Penalty_criteria,
+                Label : 'Penalty Criteria',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Base_line_spend,
-                Label : 'Base_line_spend',
+                Value : Rationale_if_not_L1,
+                Label : 'Rationale If Not L1',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Project_CurrencyORBase_Currency,
-                Label : 'Project_CurrencyORBase_Currency',
+                Value : NFAID,
+                Label : 'NFAID',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Order_CurrencyORBid_currency,
-                Label : 'Order_CurrencyORBid_currency',
+                Value : ApprovingPlant,
+                Label : 'Approving Plant',
             },
             {
                 $Type : 'UI.DataField',
-                Value : Final_proposed_Value,
-                Label : 'Final_proposed_Value',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : Savings_achieved_btw_initial_and_final_quote,
-                Label : 'Savings_achieved_btw_initial_and_final_quote',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : Savings_against_base_line_spend_of_RFP,
-                Label : 'Savings_against_base_line_spend_of_RFP',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : Number_of_Vendors_Shortlisted_for_RFP,
-                Label : 'Number_of_Vendors_Shortlisted_for_RFP',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : RFP_Number,
-                Label : 'RFP_Number',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : RFP_Publish_Date,
-                Label : 'RFP_Publish_Date',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : Time_Taken_for_FinalizationDASHIn_DAYS,
-                Label : 'Time_Taken_for_FinalizationDASHIn_DAYS',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : status,
-                Label : 'status',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : number_of_vendors_invited,
-                Label : 'number_of_vendors_invited',
+                Value : Existing_PO_number,
+                Label : 'Existing PO Number',
             },
         ],
     },
@@ -436,6 +396,10 @@ annotate service.PAN_Details_APR with @(
             },
         ],
     },
+    UI.HeaderInfo : {
+        TypeName : 'PAN Data',
+        TypeNamePlural : '',
+    },
 );
 
 annotate service.PAN_WEB_EVENT_APR with @(
@@ -483,42 +447,42 @@ annotate service.PAN_vendor_data_APR with @(
         {
             $Type : 'UI.DataField',
             Value : Awarded_Vendor,
-            Label : 'Awarded_Vendor',
+            Label : 'Awarded Vendor',
         },
         {
             $Type : 'UI.DataField',
             Value : Vendor_Name,
-            Label : 'Vendor_Name',
+            Label : 'Vendor Name',
         },
         {
             $Type : 'UI.DataField',
             Value : Original_quote,
-            Label : 'Original_quote',
+            Label : 'Original quote',
         },
         {
             $Type : 'UI.DataField',
             Value : Final_Quote,
-            Label : 'Final_Quote',
+            Label : 'Final Quote',
         },
         {
             $Type : 'UI.DataField',
             Value : Vendor_Location,
-            Label : 'Vendor_Location',
+            Label : 'Vendor Location',
         },
         {
             $Type : 'UI.DataField',
             Value : Order_amount_OR_Split_order_amount,
-            Label : 'Order_amount_OR_Split_order_amount',
+            Label : 'Order Amount Or Split Order Amount',
         },
         {
             $Type : 'UI.DataField',
             Value : Discount_Amount,
-            Label : 'Discount_Amount',
+            Label : 'Discount Amount',
         },
         {
             $Type : 'UI.DataField',
             Value : Discount_percentage,
-            Label : 'Discount_percentage',
+            Label : 'Discount Percentage',
         },
         {
             $Type : 'UI.DataField',
@@ -532,12 +496,6 @@ annotate service.PAN_vendor_data_APR with @(
             Label : 'Vendor Response',
             ID : 'VendorResponse',
             Target : '@UI.FieldGroup#VendorResponse',
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
-            Label : 'Payment Term Details',
-            ID : 'PaymentTermDetails',
-            Target : 'vendtoptd/@UI.LineItem#PaymentTermDetails',
         },
         {
             $Type : 'UI.ReferenceFacet',
@@ -728,6 +686,10 @@ annotate service.PAN_vendor_data_APR with @(
             },
         ],
     },
+    UI.HeaderInfo : {
+        TypeName : 'PAN Vendor Data',
+        TypeNamePlural : '',
+    },
 );
 
 annotate service.PAN_PAYMENT_TERM_DETAILS_APR with @(
@@ -775,17 +737,17 @@ annotate service.PAN_PRICE_DETAILS_APR with @(
           {
             $Type : 'UI.DataField',
             Value : Item_Code,
-            Label : 'Item_Code',
+            Label : 'Item Code',
         },
         {
             $Type : 'UI.DataField',
             Value : HSN_OR_SAC_Code,
-            Label : 'HSN_OR_SAC_Code',
+            Label : 'HSN Or SAC Code',
         },
         {
             $Type : 'UI.DataField',
             Value : Item_Short_Description,
-            Label : 'Item_Short_Description',
+            Label : 'Item Short Description',
         },
         {
             $Type : 'UI.DataField',
@@ -800,7 +762,7 @@ annotate service.PAN_PRICE_DETAILS_APR with @(
         {
             $Type : 'UI.DataField',
             Value : Unit_Price,
-            Label : 'Unit_Price',
+            Label : 'Unit Price',
         },
         {
             $Type : 'UI.DataField',
@@ -810,7 +772,7 @@ annotate service.PAN_PRICE_DETAILS_APR with @(
         {
             $Type : 'UI.DataField',
             Value : Indian_Tax_PER,
-            Label : 'Indian_Tax_PER',
+            Label : 'Indian Tax PER',
         },
     ]
 );
